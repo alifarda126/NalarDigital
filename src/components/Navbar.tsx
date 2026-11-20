@@ -26,6 +26,7 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -49,12 +50,13 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
   }, []);
 
   useEffect(() => {
-    const onClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
+    const onPointerDown = (event: PointerEvent) => {
+      const target = event.target as Node;
+      if (dropdownRef.current && !dropdownRef.current.contains(target)) {
         setDropdownOpen(false);
+      }
+      if (headerRef.current && !headerRef.current.contains(target)) {
+        setMobileMenuOpen(false);
       }
     };
     const onKeyDown = (event: KeyboardEvent) => {
@@ -63,10 +65,10 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
         setMobileMenuOpen(false);
       }
     };
-    document.addEventListener("mousedown", onClickOutside);
+    document.addEventListener("pointerdown", onPointerDown);
     document.addEventListener("keydown", onKeyDown);
     return () => {
-      document.removeEventListener("mousedown", onClickOutside);
+      document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("keydown", onKeyDown);
     };
   }, []);
@@ -99,13 +101,14 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
 
   return (
     <header
+      ref={headerRef}
       className={`sticky top-0 z-50 w-full bg-[#FFFFFF]/95 backdrop-blur-md transition-shadow duration-200 ${
         scrolled
           ? "shadow-[0_6px_24px_rgba(17,17,17,0.06)] border-b border-[#EFEFF5]"
           : "border-b border-transparent"
       }`}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 min-[480px]:px-5 min-[769px]:px-8 min-[1025px]:px-10">
+      <div className="relative z-50 mx-auto flex h-16 max-w-7xl items-center justify-between px-4 min-[480px]:px-5 min-[769px]:px-8 min-[1025px]:px-10">
         <a href="#home" aria-label="Nalar Digital Beranda" className="shrink-0">
           <NbsLogo variant="light" />
         </a>
@@ -126,7 +129,7 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
               aria-expanded={dropdownOpen}
               aria-haspopup="menu"
               onClick={() => setDropdownOpen((prev) => !prev)}
-              className={`inline-flex min-h-[44px] items-center gap-1.5 py-2 font-heading text-[13.5px] font-medium tracking-wide transition-colors duration-200 cursor-pointer ${
+              className={`inline-flex min-h-[44px] items-center gap-1.5 py-2 font-heading text-[13.5px] font-medium tracking-wide transition-colors duration-200 touch-manipulation cursor-pointer ${
                 activeSection === "services" || dropdownOpen
                   ? "text-[#580AC7]"
                   : "text-[#454545] hover:text-[#580AC7]"
@@ -147,8 +150,8 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
               aria-label="Menu layanan Nalar Digital"
               className={`absolute left-0 top-full mt-1.5 w-80 origin-top-left rounded-2xl border border-[#ECECF4] bg-[#FFFFFF] p-2 shadow-[0_18px_40px_rgba(17,17,17,0.12)] transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                 dropdownOpen
-                  ? "opacity-100 translate-y-0 scale-100"
-                  : "opacity-0 -translate-y-2 scale-[0.98] pointer-events-none"
+                  ? "visible opacity-100 translate-y-0 scale-100 pointer-events-auto"
+                  : "invisible opacity-0 -translate-y-2 scale-[0.98] pointer-events-none"
               }`}
             >
               {SERVICES.map((service, index) => (
@@ -158,7 +161,7 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
                   role="menuitem"
                   tabIndex={dropdownOpen ? 0 : -1}
                   onClick={() => handleServicePick(index)}
-                  className="flex w-full flex-col rounded-xl px-3.5 py-2.5 text-left transition-colors hover:bg-[#F4EEFC] cursor-pointer"
+                  className="flex w-full flex-col rounded-xl px-3.5 py-2.5 text-left transition-colors hover:bg-[#F4EEFC] touch-manipulation cursor-pointer"
                 >
                   <span className="font-heading text-sm font-semibold text-[#000000]">
                     {service.title}
@@ -191,7 +194,7 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
           <button
             type="button"
             onClick={() => onOpenContact("Discovery & Mini-Audit Gratis")}
-            className="inline-flex min-h-[40px] items-center gap-1.5 rounded-lg bg-[#580AC7] px-4 py-2 font-heading text-[13px] min-[1025px]:px-5 min-[1025px]:text-[13.5px] font-semibold text-[#FFFFFF] shadow-[0_8px_20px_rgba(88,10,199,0.25)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#4707A3] hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer whitespace-nowrap"
+            className="inline-flex min-h-[40px] items-center gap-1.5 rounded-lg bg-[#580AC7] px-4 py-2 font-heading text-[13px] min-[1025px]:px-5 min-[1025px]:text-[13.5px] font-semibold text-[#FFFFFF] shadow-[0_8px_20px_rgba(88,10,199,0.25)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-[#4707A3] hover:-translate-y-0.5 active:scale-[0.98] touch-manipulation cursor-pointer whitespace-nowrap"
           >
             Konsultasi Gratis →
           </button>
@@ -203,22 +206,33 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
           aria-label="Toggle navigation menu"
           aria-expanded={mobileMenuOpen}
           onClick={() => setMobileMenuOpen((prev) => !prev)}
-          className="inline-flex min-[769px]:hidden h-11 w-11 items-center justify-center rounded-lg text-[#000000] transition-colors hover:bg-[#F4EEFC] cursor-pointer"
+          className="inline-flex min-[769px]:hidden h-11 w-11 items-center justify-center rounded-lg text-[#000000] transition-colors hover:bg-[#F4EEFC] touch-manipulation cursor-pointer"
         >
           {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
-      {/* Smooth collapsible Mobile drawer */}
+      {/* Tap-outside backdrop for mobile drawer */}
+      <div
+        aria-hidden="true"
+        onClick={() => setMobileMenuOpen(false)}
+        className={`min-[769px]:hidden fixed inset-0 top-16 z-30 bg-[#111111]/20 transition-opacity duration-300 ${
+          mobileMenuOpen
+            ? "visible opacity-100 pointer-events-auto"
+            : "invisible opacity-0 pointer-events-none"
+        }`}
+      />
+
+      {/* Smooth overlay Mobile drawer (overlays cleanly without shifting page layout) */}
       <div
         aria-hidden={!mobileMenuOpen}
-        className={`min-[769px]:hidden grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`min-[769px]:hidden absolute inset-x-0 top-full z-40 grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           mobileMenuOpen
-            ? "grid-rows-[1fr] opacity-100 border-t border-[#EFEFF5]"
-            : "grid-rows-[0fr] opacity-0 pointer-events-none"
+            ? "visible grid-rows-[1fr] opacity-100 border-t border-[#EFEFF5] pointer-events-auto"
+            : "invisible grid-rows-[0fr] opacity-0 pointer-events-none"
         }`}
       >
-        <div className="overflow-hidden bg-[#FFFFFF] shadow-lg">
+        <div className="overflow-hidden bg-[#FFFFFF] shadow-[0_18px_40px_rgba(17,17,17,0.14)]">
           <nav aria-label="Mobile navigation" className="flex flex-col gap-1 px-5 pb-6 pt-3">
             <a
               href="#home"
@@ -239,7 +253,7 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
                 tabIndex={mobileMenuOpen ? 0 : -1}
                 aria-expanded={mobileServicesOpen}
                 onClick={() => setMobileServicesOpen((prev) => !prev)}
-                className="flex w-full items-center justify-between rounded-lg px-3 py-3 font-heading text-sm font-semibold text-[#000000] hover:bg-[#F4EEFC]/50 cursor-pointer"
+                className="flex w-full items-center justify-between rounded-lg px-3 py-3 font-heading text-sm font-semibold text-[#000000] hover:bg-[#F4EEFC]/50 touch-manipulation cursor-pointer"
               >
                 <span>LAYANAN</span>
                 <ChevronDown
@@ -249,10 +263,11 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
                 />
               </button>
               <div
+                aria-hidden={!mobileServicesOpen}
                 className={`grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                   mobileServicesOpen
-                    ? "grid-rows-[1fr] opacity-100 mt-1"
-                    : "grid-rows-[0fr] opacity-0 pointer-events-none"
+                    ? "visible grid-rows-[1fr] opacity-100 mt-1 pointer-events-auto"
+                    : "invisible grid-rows-[0fr] opacity-0 pointer-events-none"
                 }`}
               >
                 <div className="overflow-hidden">
@@ -263,7 +278,7 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
                         type="button"
                         tabIndex={mobileMenuOpen && mobileServicesOpen ? 0 : -1}
                         onClick={() => handleServicePick(index)}
-                        className="rounded-lg px-2.5 py-2 text-left font-heading text-xs font-semibold text-[#27272A] hover:bg-[#F4EEFC] hover:text-[#580AC7] cursor-pointer"
+                        className="rounded-lg px-2.5 py-2.5 text-left font-heading text-xs font-semibold text-[#27272A] hover:bg-[#F4EEFC] hover:text-[#580AC7] touch-manipulation cursor-pointer"
                       >
                         {service.title}
                       </button>
@@ -319,7 +334,7 @@ export function Navbar({ onSelectService, onOpenContact }: NavbarProps) {
                 setMobileMenuOpen(false);
                 onOpenContact("Discovery & Mini-Audit Gratis");
               }}
-              className="mt-3 w-full rounded-lg bg-[#580AC7] px-5 py-3 text-center font-heading text-sm font-semibold text-[#FFFFFF] transition-colors hover:bg-[#4707A3] active:scale-[0.98] cursor-pointer"
+              className="mt-3 w-full rounded-lg bg-[#580AC7] px-5 py-3 text-center font-heading text-sm font-semibold text-[#FFFFFF] transition-colors hover:bg-[#4707A3] active:scale-[0.98] touch-manipulation cursor-pointer"
             >
               Konsultasi Gratis →
             </button>

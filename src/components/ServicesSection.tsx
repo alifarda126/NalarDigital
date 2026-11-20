@@ -66,7 +66,7 @@ export function ServicesSection({
                       onSelectIndex(index);
                     }
                   }}
-                  className={`group relative flex min-w-0 flex-col justify-between overflow-hidden rounded-2xl p-6 min-[1025px]:h-[344px] min-[1025px]:p-8 transition-[flex-grow,background-color,border-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-pointer ${
+                  className={`group relative flex min-w-0 flex-col justify-between overflow-hidden rounded-2xl p-6 min-[1025px]:h-[344px] min-[1025px]:p-8 transition-[flex-grow,background-color,border-color,box-shadow,transform] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] touch-manipulation cursor-pointer ${
                     isActive
                       ? "min-[1025px]:flex-[2.25] bg-[#FCFCFC] border border-[#EFE9FB] shadow-[0_20px_50px_rgba(88,10,199,0.08)]"
                       : "min-[1025px]:flex-1 bg-[#F4EEFC] border border-[#E7DCF9] hover:-translate-y-0.5 hover:border-[#CFB8F6]"
@@ -117,8 +117,8 @@ export function ServicesSection({
                       aria-hidden={!isActive}
                       className={`grid transition-[grid-template-rows,opacity,transform,margin] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isActive
-                          ? "mt-3 grid-rows-[1fr] opacity-100 translate-y-0"
-                          : "mt-0 grid-rows-[0fr] opacity-0 translate-y-2 pointer-events-none"
+                          ? "visible mt-3 grid-rows-[1fr] opacity-100 translate-y-0 pointer-events-auto"
+                          : "invisible mt-0 grid-rows-[0fr] opacity-0 translate-y-2 pointer-events-none"
                       }`}
                     >
                       <div className="overflow-hidden">
@@ -134,7 +134,7 @@ export function ServicesSection({
                                 event.stopPropagation();
                                 onDiscoverMore(service.title);
                               }}
-                              className="inline-flex min-h-[36px] items-center gap-2 font-heading text-sm font-bold text-[#580AC7] transition-transform duration-200 hover:translate-x-0.5 hover:underline cursor-pointer"
+                              className="inline-flex min-h-[40px] items-center gap-2 font-heading text-sm font-bold text-[#580AC7] transition-transform duration-200 hover:translate-x-0.5 hover:underline touch-manipulation cursor-pointer"
                             >
                               Konsultasi Layanan
                               <ArrowRight className="h-4 w-4" />
@@ -149,8 +149,8 @@ export function ServicesSection({
                       aria-hidden={isActive}
                       className={`grid transition-[grid-template-rows,opacity,margin] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
                         isActive
-                          ? "mt-0 grid-rows-[0fr] opacity-0 pointer-events-none"
-                          : "mt-3 grid-rows-[1fr] opacity-100"
+                          ? "invisible mt-0 grid-rows-[0fr] opacity-0 pointer-events-none"
+                          : "visible mt-3 grid-rows-[1fr] opacity-100 pointer-events-auto"
                       }`}
                     >
                       <div className="overflow-hidden">

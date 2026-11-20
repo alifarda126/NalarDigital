@@ -17,7 +17,7 @@ export function Footer({ onSelectService, onOpenContact }: FooterProps) {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-[#111111] pt-14 pb-24 text-[#FFFFFF] min-[769px]:pt-16 min-[769px]:pb-16 min-[1025px]:pt-20">
+    <footer className="relative overflow-hidden bg-[#111111] pt-14 pb-28 text-[#FFFFFF] min-[769px]:pt-16 min-[769px]:pb-24 min-[1025px]:pt-20">
       {/* Delicate layered topographic wave strokes */}
       <svg
         aria-hidden="true"
