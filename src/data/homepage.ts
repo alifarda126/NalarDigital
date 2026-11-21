@@ -1,4 +1,5 @@
-export type PlatformType = "android" | "ios" | "web";
+import defaultPortfoliosJson from "./portfolios.json";
+import type { PortfolioItem } from "@/types/portfolio";
 
 export interface ServiceItem {
   id: string;
@@ -6,30 +7,6 @@ export interface ServiceItem {
   shortDesc: string;
   description: string;
   icon: "palette" | "code" | "refresh" | "compass";
-}
-
-export interface PortfolioItem {
-  id: string;
-  clientId: string;
-  name: string;
-  category: string;
-  platforms: PlatformType[];
-  accent: string;
-  secondaryAccent: string;
-  surfaceTint: string;
-  kind:
-    | "streaming"
-    | "insurance"
-    | "ecommerce"
-    | "transit"
-    | "sales"
-    | "ticketing"
-    | "automotive"
-    | "rental"
-    | "loyalty"
-    | "learning"
-    | "corporate"
-    | "eoffice";
 }
 
 export interface StatItem {
@@ -41,15 +18,16 @@ export interface StatItem {
   description: string;
 }
 
-export interface ClientLogoItem {
-  id: string;
-  name: string;
-}
-
 export interface TargetSectorItem {
   id: string;
   label: string;
-  icon: "utensils" | "stethoscope" | "briefcase" | "building" | "graduation" | "store";
+  icon:
+    | "utensils"
+    | "stethoscope"
+    | "briefcase"
+    | "building"
+    | "graduation"
+    | "store";
 }
 
 export interface PricingPackageItem {
@@ -139,160 +117,9 @@ export const SERVICES: ServiceItem[] = [
   },
 ];
 
-/* Portofolio dibiarkan utuh sesuai permintaan untuk diisi proyek semester sebelumnya */
-export const PORTFOLIO_ITEMS: PortfolioItem[] = [
-  {
-    id: "indihometv",
-    clientId: "telkom",
-    name: "IndiHomeTV",
-    category: "Streaming • Video on Demand",
-    platforms: ["android", "ios", "web"],
-    accent: "#DC2626",
-    secondaryAccent: "#450A0A",
-    surfaceTint: "#991B1B",
-    kind: "streaming",
-  },
-  {
-    id: "jmo",
-    clientId: "bpjs",
-    name: "JMO (BPJS Ketenagakerjaan)",
-    category: "Insurance • Finance",
-    platforms: ["android", "ios"],
-    accent: "#16A34A",
-    secondaryAccent: "#064E3B",
-    surfaceTint: "#BAE6FD",
-    kind: "insurance",
-  },
-  {
-    id: "eraspace",
-    clientId: "erajaya",
-    name: "Eraspace",
-    category: "E-Commerce • Lifestyle",
-    platforms: ["android", "ios"],
-    accent: "#1D4ED8",
-    secondaryAccent: "#0F172A",
-    surfaceTint: "#2563EB",
-    kind: "ecommerce",
-  },
-  {
-    id: "mrt-jakarta",
-    clientId: "mrt",
-    name: "MRT Jakarta",
-    category: "Transportation • Lifestyle",
-    platforms: ["android", "ios", "web"],
-    accent: "#0284C7",
-    secondaryAccent: "#0C4A6E",
-    surfaceTint: "#E0F2FE",
-    kind: "transit",
-  },
-  {
-    id: "paragon-sfm",
-    clientId: "paragon",
-    name: "Paragon SFM",
-    category: "Productivity • Sales Force",
-    platforms: ["android", "web"],
-    accent: "#1E40AF",
-    secondaryAccent: "#172554",
-    surfaceTint: "#1D4ED8",
-    kind: "sales",
-  },
-  {
-    id: "tix-id",
-    clientId: "tixid",
-    name: "TIX ID",
-    category: "Ticketing • Streaming • Video on Demand",
-    platforms: ["android", "ios", "web"],
-    accent: "#1E293B",
-    secondaryAccent: "#0F172A",
-    surfaceTint: "#1E1B4B",
-    kind: "ticketing",
-  },
-  {
-    id: "daihatsuku",
-    clientId: "astra",
-    name: "DaihatsuKu",
-    category: "Automotive • Sales Force",
-    platforms: ["android"],
-    accent: "#EA580C",
-    secondaryAccent: "#1E3A8A",
-    surfaceTint: "#1D4ED8",
-    kind: "automotive",
-  },
-  {
-    id: "movic-id",
-    clientId: "astra",
-    name: "Movic.id",
-    category: "On Demand Rental Service • Transportation",
-    platforms: ["android", "ios"],
-    accent: "#0D9488",
-    secondaryAccent: "#134E4A",
-    surfaceTint: "#CCFBF1",
-    kind: "rental",
-  },
-  {
-    id: "acer-juara",
-    clientId: "acer",
-    name: "Acer Juara",
-    category: "Loyalty App • Sales Force",
-    platforms: ["android", "web"],
-    accent: "#65A30D",
-    secondaryAccent: "#365314",
-    surfaceTint: "#84CC16",
-    kind: "loyalty",
-  },
-  {
-    id: "pln-digital-learning",
-    clientId: "pln",
-    name: "PLN Digital Learning",
-    category: "Digital Learning • Education",
-    platforms: ["web"],
-    accent: "#0284C7",
-    secondaryAccent: "#0C4A6E",
-    surfaceTint: "#38BDF8",
-    kind: "learning",
-  },
-  {
-    id: "pusri",
-    clientId: "pegadaian",
-    name: "PUSRI",
-    category: "Company Profile",
-    platforms: ["web"],
-    accent: "#0369A1",
-    secondaryAccent: "#0F172A",
-    surfaceTint: "#E0F2FE",
-    kind: "corporate",
-  },
-  {
-    id: "tbig-mobile-apps",
-    clientId: "tbig",
-    name: "TBIG Mobile Apps",
-    category: "E-Office • Productivity",
-    platforms: ["android", "ios", "web"],
-    accent: "#2563EB",
-    secondaryAccent: "#1E3A8A",
-    surfaceTint: "#1E40AF",
-    kind: "eoffice",
-  },
-];
-
-/* Lookup label klien untuk PortfolioSection agar tetap utuh */
-export const HAPPY_CLIENTS: ClientLogoItem[] = [
-  { id: "telkom", name: "Telkom" },
-  { id: "astra", name: "Astra" },
-  { id: "google", name: "Google" },
-  { id: "gojek", name: "Gojek" },
-  { id: "ovo", name: "OVO" },
-  { id: "acer", name: "Acer" },
-  { id: "pln", name: "PLN" },
-  { id: "bpjs", name: "BPJS" },
-  { id: "paragon", name: "Paragon" },
-  { id: "pegadaian", name: "Pegadaian" },
-  { id: "tbig", name: "Tower Bersama Group" },
-  { id: "mrt", name: "MRT Jakarta" },
-  { id: "tixid", name: "TixID" },
-  { id: "olx", name: "OLX" },
-  { id: "erajaya", name: "Erajaya" },
-];
+/** Default starter portfolios loaded from src/data/portfolios.json */
+export const DEFAULT_PORTFOLIOS: PortfolioItem[] =
+  defaultPortfoliosJson as PortfolioItem[];
 
 export const STATS: StatItem[] = [
   {

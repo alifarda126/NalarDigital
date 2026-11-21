@@ -1,0 +1,241 @@
+[
+  {
+    "id": "kasnalar-fintech",
+    "slug": "kasnalar-pembukuan-umkm",
+    "name": "KasNalar — Pembukuan & Arus Kas UMKM",
+    "clientName": "Koperasi Tumbuh Malang",
+    "categoryId": "keuangan",
+    "categoryLabel": "Keuangan & Fintech",
+    "summary": "Aplikasi pencatatan transaksi harian, laporan laba-rugi otomatis, dan pengingat tagihan piutang berbasis data untuk UMKM kuliner dan ritel.",
+    "platforms": [
+      "android",
+      "web"
+    ],
+    "techStack": [
+      "Kotlin",
+      "Jetpack Compose",
+      "Next.js",
+      "PostgreSQL"
+    ],
+    "year": 2026,
+    "featured": true,
+    "accent": "#3A4EFB",
+    "secondaryAccent": "#252943",
+    "surfaceTint": "#33A4FA",
+    "mockupKind": "finance",
+    "createdAt": "2026-02-10T08:00:00.000Z",
+    "updatedAt": "2026-02-10T08:00:00.000Z"
+  },
+  {
+    "id": "jasarapi-pro",
+    "slug": "jasarapi-pro-booking",
+    "name": "JasaRapi Pro — Booking Teknisi & Jasa",
+    "clientName": "JasaRapi Nusantara",
+    "categoryId": "jasa",
+    "categoryLabel": "Jasa Profesional",
+    "summary": "Platform pemesanan jasa perawatan AC, kelistrikan, dan konsultasi properti lengkap dengan estimasi harga transparan dan pelacakan teknisi real-time.",
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "techStack": [
+      "Flutter",
+      "TypeScript",
+      "Firebase"
+    ],
+    "year": 2026,
+    "featured": true,
+    "accent": "#33A4FA",
+    "secondaryAccent": "#1B1E35",
+    "surfaceTint": "#3A4EFB",
+    "mockupKind": "service",
+    "createdAt": "2026-02-18T08:00:00.000Z",
+    "updatedAt": "2026-02-18T08:00:00.000Z"
+  },
+  {
+    "id": "kopi-rimbun-pos",
+    "slug": "kopi-rimbun-pos-loyalty",
+    "name": "Kopi Rimbun POS & Member Loyalty",
+    "clientName": "Kopi Rimbun Roastery",
+    "categoryId": "fnb",
+    "categoryLabel": "Food & Beverage (F&B)",
+    "summary": "Sistem kasir tablet Android dan kartu poin pelanggan digital untuk mempercepat antrean outlet dan meningkatkan repeat order sebesar 32%.",
+    "platforms": [
+      "android",
+      "web"
+    ],
+    "techStack": [
+      "Kotlin",
+      "Node.js",
+      "Tailwind CSS"
+    ],
+    "year": 2025,
+    "featured": true,
+    "accent": "#E3FF3B",
+    "secondaryAccent": "#252943",
+    "surfaceTint": "#3A4EFB",
+    "mockupKind": "fnb",
+    "createdAt": "2025-11-12T08:00:00.000Z",
+    "updatedAt": "2025-11-12T08:00:00.000Z"
+  },
+  {
+    "id": "klinik-sehat-malang",
+    "slug": "klinik-sehat-antrean-online",
+    "name": "KlinikSehat — Reservasi & Antrean Pasien",
+    "clientName": "Klinik Pratama Sehat Sentosa",
+    "categoryId": "kesehatan",
+    "categoryLabel": "Klinik & Kesehatan",
+    "summary": "Aplikasi pendaftaran pasien, jadwal praktik dokter, pengingat kontrol via WhatsApp, serta dashboard manajemen rekam kunjungan klinik.",
+    "platforms": [
+      "android",
+      "ios",
+      "web"
+    ],
+    "techStack": [
+      "React Native",
+      "Laravel",
+      "PostgreSQL"
+    ],
+    "year": 2026,
+    "featured": false,
+    "accent": "#33A4FA",
+    "secondaryAccent": "#252943",
+    "surfaceTint": "#5CC0FF",
+    "mockupKind": "health",
+    "createdAt": "2026-03-04T08:00:00.000Z",
+    "updatedAt": "2026-03-04T08:00:00.000Z"
+  },
+  {
+    "id": "grahamalang-property",
+    "slug": "grahamalang-katalog-properti",
+    "name": "GrahaMalang — Portal Properti & Simulasi KPR",
+    "clientName": "PT Graha Sejahtera Properti",
+    "categoryId": "properti",
+    "categoryLabel": "Properti & Hunian",
+    "summary": "Website katalog perumahan SEO-ready dengan filter lokasi, simulasi cicilan KPR interaktif, dan formulir jadwal survei terintegrasi CRM.",
+    "platforms": [
+      "web",
+      "uiux"
+    ],
+    "techStack": [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Figma"
+    ],
+    "year": 2025,
+    "featured": false,
+    "accent": "#3A4EFB",
+    "secondaryAccent": "#1B1E35",
+    "surfaceTint": "#6374FF",
+    "mockupKind": "property",
+    "createdAt": "2025-10-20T08:00:00.000Z",
+    "updatedAt": "2025-10-20T08:00:00.000Z"
+  },
+  {
+    "id": "kelasnalar-lms",
+    "slug": "kelasnalar-lms-edukasi",
+    "name": "KelasNalar — LMS & Progress Tracker",
+    "clientName": "Lembaga Kursus Cendekia",
+    "categoryId": "pendidikan",
+    "categoryLabel": "Pendidikan & LMS",
+    "summary": "Platform kelas hybrid dengan materi video terstruktur, latihan soal otomatis, sertifikat digital, dan dashboard pemantauan belajar untuk orang tua.",
+    "platforms": [
+      "web",
+      "android"
+    ],
+    "techStack": [
+      "Next.js",
+      "Flutter",
+      "Python"
+    ],
+    "year": 2026,
+    "featured": false,
+    "accent": "#33A4FA",
+    "secondaryAccent": "#252943",
+    "surfaceTint": "#3A4EFB",
+    "mockupKind": "education",
+    "createdAt": "2026-04-02T08:00:00.000Z",
+    "updatedAt": "2026-04-02T08:00:00.000Z"
+  },
+  {
+    "id": "batikloka-store",
+    "slug": "batikloka-ecommerce-umkm",
+    "name": "BatikLoka — Katalog & Checkout UMKM",
+    "clientName": "Sentra Batik Loka Jatim",
+    "categoryId": "ecommerce",
+    "categoryLabel": "E-Commerce UMKM",
+    "summary": "Toko online responsif dengan variasi ukuran otomatis, estimasi ongkir instan, dan integrasi pembayaran QRIS untuk perajin batik lokal.",
+    "platforms": [
+      "android",
+      "ios",
+      "web"
+    ],
+    "techStack": [
+      "Flutter",
+      "Next.js",
+      "TypeScript"
+    ],
+    "year": 2025,
+    "featured": false,
+    "accent": "#3A4EFB",
+    "secondaryAccent": "#252943",
+    "surfaceTint": "#4F6BFF",
+    "mockupKind": "ecommerce",
+    "createdAt": "2025-09-14T08:00:00.000Z",
+    "updatedAt": "2025-09-14T08:00:00.000Z"
+  },
+  {
+    "id": "trackops-b2b",
+    "slug": "trackops-b2b-inventaris",
+    "name": "TrackOps — Monitoring Distribusi & Stok B2B",
+    "clientName": "CV Sumber Pangan Distribusindo",
+    "categoryId": "umkm-b2b",
+    "categoryLabel": "Operasional & B2B",
+    "summary": "Dashboard B2B dan aplikasi scan barcode gudang Android untuk memangkas selisih stok hingga 65% dan mempercepat laporan pengiriman harian.",
+    "platforms": [
+      "web",
+      "android"
+    ],
+    "techStack": [
+      "TypeScript",
+      "React",
+      "Go",
+      "Kotlin"
+    ],
+    "year": 2026,
+    "featured": false,
+    "accent": "#E3FF3B",
+    "secondaryAccent": "#1B1E35",
+    "surfaceTint": "#252943",
+    "mockupKind": "b2b",
+    "createdAt": "2026-05-01T08:00:00.000Z",
+    "updatedAt": "2026-05-01T08:00:00.000Z"
+  },
+  {
+    "id": "nusantara-roast-rebrand",
+    "slug": "nusantara-roast-brand-system",
+    "name": "Nusantara Roast — Brand System & Social Growth",
+    "clientName": "Nusantara Artisan Coffee",
+    "categoryId": "branding",
+    "categoryLabel": "Branding & Konten",
+    "summary": "Perancangan ulang identitas merek, sistem komponen desain Figma, serta kampanye reels & carousel berbasis data audiens untuk ekspansi cabang baru.",
+    "platforms": [
+      "uiux",
+      "web"
+    ],
+    "techStack": [
+      "Figma",
+      "Design System",
+      "SEO"
+    ],
+    "year": 2026,
+    "featured": false,
+    "accent": "#E3FF3B",
+    "secondaryAccent": "#252943",
+    "surfaceTint": "#3A4EFB",
+    "mockupKind": "branding",
+    "createdAt": "2026-05-15T08:00:00.000Z",
+    "updatedAt": "2026-05-15T08:00:00.000Z"
+  }
+]

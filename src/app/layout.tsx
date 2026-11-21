@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   title: "Nalar Digital — Insight-Driven Growth. Decisions That Matter.",
   description:
     "Full-service digital agency berkonsep Build & Grow dengan pendekatan Insight-Driven Decision Making untuk UMKM dan perusahaan B2B.",
+  icons: {
+    icon: "/images/brand/logo-nd-transparent.png",
+    apple: "/images/brand/logo-nd-transparent.png",
+  },
 };
 
 export default function RootLayout({
@@ -31,7 +35,7 @@ export default function RootLayout({
     >
       <body
         suppressHydrationWarning
-        className="min-h-screen bg-[#FBFBFB] font-sans text-[#000000] antialiased overflow-x-hidden"
+        className="min-h-screen bg-brand-canvas font-sans text-brand-navy antialiased overflow-x-hidden"
       >
         {children}
       </body>

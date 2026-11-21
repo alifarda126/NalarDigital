@@ -2,7 +2,7 @@
 
 > **Insight-Driven Growth. Decisions That Matter.**
 
-Website profil dan *landing page* resmi **Nalar Digital**, sebuah *full-service digital agency* berkonsep **Build & Grow** dengan pendekatan *Insight-Driven Decision Making* untuk UMKM skala menengah dan bisnis B2B lokal (F&B, Klinik Kesehatan, Jasa Profesional, Properti, dan Pendidikan).
+Website profil, katalog portofolio dinamis, dan **Asset & Portofolio Studio** resmi **Nalar Digital** — *full-service digital agency* berkonsep **Build & Grow** dengan pendekatan *Insight-Driven Decision Making* untuk UMKM skala menengah dan bisnis B2B lokal (Keuangan, Jasa Profesional, F&B, Klinik Kesehatan, Properti, dan Pendidikan).
 
 Dikembangkan secara *remote-first* dari Malang oleh tim mahasiswa **D3 Teknologi Informasi Universitas Brawijaya**.
 
@@ -10,158 +10,119 @@ Dikembangkan secara *remote-first* dari Malang oleh tim mahasiswa **D3 Teknologi
 
 ---
 
-## Fitur & Struktur Halaman
+## Fitur Utama
 
-Halaman utama dirangkai dalam `src/components/HomePageClient.tsx` menjadi 11 *section* terstruktur ditambah modal konsultasi (`ContactModal.tsx`):
+### 1. Landing Page Profil Agensi (`/`)
+Dirangkai dalam `src/components/HomePageClient.tsx` menjadi section terstruktur ditambah modal konsultasi (`ContactModal.tsx`) dan detail portofolio (`PortfolioDetailModal.tsx`):
+- **Sticky Navbar (`Navbar.tsx`)** — Logo resmi **ND** (`BrandLogo.tsx`), Scroll-Spy otomatis, dropdown `LAYANAN`, navigasi langsung ke `ASSET` (`/assets`), CTA `Konsultasi Gratis`, dan mobile drawer.
+- **Hero Section (`HeroSection.tsx`)** — Tagline, judul utama animasi ketik *zero-CLS* dengan aksen gradien biru elektrik & neon lime, CTA ganda, dan foto tim studio.
+- **Sektor Target (`TrustStrip.tsx`)** — 6 sektor fokus UMKM dan B2B lokal.
+- **Layanan Build & Grow (`ServicesSection.tsx`)** — 4 kartu layanan interaktif melebar.
+- **Portofolio Interaktif (`PortfolioSection.tsx`)** — Terhubung langsung ke `src/data/portfolios.json`, dilengkapi filter **Bidang Aplikasi** (Keuangan, Jasa, F&B, Kesehatan, Properti, Pendidikan, E-Commerce, B2B, Branding), filter **Platform** (`Android`, `iOS`, `Web`, `UI/UX`), pencarian berdasarkan nama/klien/**bahasa pemrograman** (`Kotlin`, `Flutter`, `Next.js`, dll.), serta Modal Detail proyek.
+- **Statistik Bento (`StatsSection.tsx`)**, **Paket & Harga (`HappyClientsSection.tsx`)**, **Alur Kerja & Tim Inti (`TestimonialsSection.tsx`)**, **CTA Mini-Audit (`CtaSection.tsx`)**, **Floating WhatsApp (`WhatsAppWidget.tsx`)**, dan **Footer Deep Navy (`Footer.tsx`)**.
 
-1. **Sticky Navbar (`src/components/Navbar.tsx`)**  
-   Navigasi atas dengan *Scroll-Spy* otomatis, dropdown `LAYANAN`, tombol CTA `Konsultasi Gratis`, serta *drawer* overlay responsif untuk tampilan mobile dan tablet.
-2. **Hero Section (`src/components/HeroSection.tsx`)**  
-   Menampilkan *tagline*, judul utama dengan animasi ketik *zero-CLS*, dua tombol aksi (*Pelajari Layanan Kami* & *Minta Mini-Audit Gratis*), dan foto tim studio lokal (`public/images/hero-team.jpg`).
-3. **Sektor Target (`src/components/TrustStrip.tsx`)**  
-   Menyoroti 6 sektor fokus UMKM dan B2B lokal: *Food & Beverage (F&B)*, *Klinik Kesehatan*, *Jasa Profesional*, *Properti*, *Pendidikan*, dan *UMKM & B2B Lokal*.
-4. **Layanan Build & Grow (`src/components/ServicesSection.tsx`)**  
-   4 kartu layanan interaktif dengan efek kartu aktif yang melebar:
-   - *Branding & Creative Data-Driven*
-   - *UI/UX & Web / Mobile App*
-   - *SEO, SEM & ASO Growth*
-   - *Paket All-in-One (Build & Grow)*
-5. **Portofolio (`src/components/PortfolioSection.tsx`)**  
-   Grid 3 kolom pada desktop (2 kolom pada `≤1024px`, 1 kolom pada `≤768px`) berisi 12 kartu *placeholder* yang disiapkan agar mudah diisi proyek semester tim.
-6. **Statistik & Keunggulan (`src/components/StatsSection.tsx`)**  
-   Tata letak *Bento grid* 12 kolom dengan animasi *count-up* saat masuk viewport: `20%` *Hemat Bundling All-in-One*, `5` *Tim Inti D3 TI UB*, `40%` *Produksi Lebih Efisien*, `3` *Pilar Pertumbuhan*, dan `30 Hari` *Strategi Quick Win*.
-7. **Pilihan Paket & Harga (`src/components/HappyClientsSection.tsx` / `#pricing`)**  
-   4 paket transparan sesuai kesiapan bisnis:
-   - **Paket Build** (`Rp2,5 jt – Rp10 jt+`, *Project-Based*)
-   - **Paket Creative & Sosmed** (`Rp1,2 jt – Rp3 jt / bulan`)
-   - **Paket Grow** (`Rp1,5 jt – Rp5 jt / bulan`, retainer 3–12 bulan)
-   - **Paket All-in-One** (*Bundling Khusus*, hemat `15%–20%`)
-8. **Alur Kerja & Tim Inti (`src/components/TestimonialsSection.tsx` / `#workflow`)**  
-   Carousel geser horizontal 6 tahap kolaborasi (`01` hingga `06`) dari *Discovery & Mini-Audit* hingga *Monthly Strategic Review & Scaling*, diikuti ringkasan 3 peran tim inti.
-9. **CTA Mini-Audit Gratis (`src/components/CtaSection.tsx`)**  
-   Blok ajakan 2 kolom dengan ilustrasi vektor (`EditorialIllustrations.tsx`) yang membuka modal konsultasi.
-10. **Floating WhatsApp Widget (`src/components/WhatsAppWidget.tsx`)**  
-    Tombol WhatsApp melayang di sudut kanan bawah dengan panel pemilihan 5 topik konsultasi.
-11. **Footer 4-Band (`src/components/Footer.tsx`)**  
-    Footer gelap (`#111111`) berlatar kontur gelombang tipis berisi misi agensi, informasi operasional *remote-first* Malang, tautan navigasi, pintasan 4 layanan, serta kontak dan ikon media sosial.
-
-> Dirancang *desktop-first* dan teruji responsif pada viewport `1440px`, `1024px`, `768px`, `440px`, dan `375px`, serta menghormati preferensi `prefers-reduced-motion`.
+### 2. Asset & Portofolio Studio (`/assets`)
+Halaman studio khusus yang dirancang untuk memudahkan tim mengembangkan portofolio tanpa harus mengedit kode secara manual:
+- **Kelola Portofolio (Tambah / Edit / Hapus):**
+  - Pilih **Bidang Aplikasi** (Keuangan & Fintech, Jasa Profesional, F&B, Klinik Kesehatan, Properti, Pendidikan, E-Commerce UMKM, Operasional B2B, Branding & Konten).
+  - Pilih **Platform** (`Android`, `iOS`, `Web App`, `UI/UX & Branding`).
+  - Pilih **Bahasa Pemrograman & Tech Stack** kontekstual (mis. memilih `Android` langsung menampilkan saran `Kotlin`, `Java`, `Flutter`, `React Native`, `Jetpack Compose`, `Firebase`) + input bahasa kustom.
+  - Pilih **Asset Visual** dari Pustaka Asset, unggah gambar langsung, atau gunakan *Auto Mockup* sesuai kategori — lengkap dengan **Live Preview Card**.
+- **Pustaka Asset & Brand Kit:**
+  - Upload gambar *drag-and-drop* (`PNG`, `JPG/JPEG`, `WEBP`, maks. `5 MB`) dengan validasi *magic bytes* & sanitasi nama file.
+  - Koleksi **Brand Kit** resmi: 3 varian logo **ND** (`Transparent`, `Dark`, `Light`) + 5 swatch palet warna resmi dengan 1-klik *Copy Hex*.
+- **Hybrid Persistence:**
+  - **Local Development (`npm run dev`):** Menulis langsung ke `src/data/portfolios.json` dan `public/assets/portfolio/` melalui Route Handlers `/api/portfolios` dan `/api/assets`.
+  - **Environment Read-Only (mis. Vercel):** Otomatis beralih ke `localStorage` browser dilengkapi fitur **Export JSON** dan **Import JSON**.
 
 ---
 
-## Tech Stack & Design Tokens
-
-| Kategori | Teknologi / Nilai |
-| --- | --- |
-| Framework | Next.js `16.4.6` (App Router & Turbopack) |
-| UI Library | React `19.3.0` |
-| Bahasa | TypeScript `^5` |
-| Styling | Tailwind CSS `4.3.3` (`@tailwindcss/turbopack`) |
-| Ikon | `lucide-react` `^1.77.0` |
-| Tipografi | `Rubik` (heading) & `Open Sans` (body) via `next/font/google` |
-| Linter | ESLint `^9` (`eslint-config-next`) |
-
-### Warna Utama (`src/app/globals.css`)
+## Design Tokens & Palet Warna (`src/app/globals.css` & `src/config/theme.ts`)
 
 | Token CSS | Hex | Kegunaan |
 | --- | --- | --- |
-| `--color-primary` | `#580AC7` | Aksen utama, tombol CTA, indikator aktif |
-| `--color-teal` | `#137D88` | Aksen sekunder merek, tautan kontak, angka statistik |
-| `--color-bg` | `#FBFBFB` | Permukaan latar halaman utama |
-| `--color-service-idle` | `#F4EEFC` | Latar kartu layanan non-aktif & aksen lembut |
-| `--color-footer-bg` | `#111111` | Latar bagian footer |
-| `--color-whatsapp` | `#25D366` | Tombol dan header widget WhatsApp |
+| `--color-primary` | `#3A4EFB` | Electric Cobalt — gradien utama, tombol CTA, link & tab aktif |
+| `--color-primary-end` | `#33A4FA` | Sky Electric — ujung gradien primer, tautan pada latar gelap |
+| `--color-accent-lime` | `#E3FF3B` | Neon Lime — badge highlight, kartu metrik, CTA kontras di latar navy |
+| `--color-navy` | `#252943` | Deep Navy — teks utama, heading, panel header studio, footer |
+| `--color-surface-muted` | `#DEE0ED` | Periwinkle Mist — latar strip section, border lembut, kartu non-aktif |
+| `--color-bg` | `#F7F8FC` | Kanvas latar halaman terang |
 
 ---
 
-## Struktur Direktori
+## Tech Stack
 
-```text
-KWU/
-├── public/
-│   └── images/
-│       └── hero-team.jpg              # Foto tim studio untuk Hero section
-├── src/
-│   ├── app/
-│   │   ├── favicon.ico
-│   │   ├── globals.css                # Token warna, utilitas animasi & carousel
-│   │   ├── layout.tsx                 # Metadata & font Google (Rubik + Open Sans)
-│   │   └── page.tsx                   # Entrypoint halaman utama
-│   ├── components/
-│   │   ├── ClientLogoMark.tsx         # Komponen logo klien portofolio
-│   │   ├── ContactModal.tsx           # Modal pengajuan Mini-Audit & konsultasi
-│   │   ├── CtaSection.tsx             # Section CTA Mini-Audit Gratis
-│   │   ├── EditorialIllustrations.tsx # Ilustrasi SVG editorial (Stats & CTA)
-│   │   ├── Footer.tsx                 # Footer 4-band
-│   │   ├── HappyClientsSection.tsx    # Section 4 paket harga (#pricing)
-│   │   ├── HeroSection.tsx            # Hero banner dengan efek ketik
-│   │   ├── HomePageClient.tsx         # Orkestrator 11 section + modal
-│   │   ├── Navbar.tsx                 # Header sticky + drawer mobile
-│   │   ├── NbsLogo.tsx                # Logo wordmark Nalar Digital (3x3 grid)
-│   │   ├── PortfolioMockup.tsx        # Mockup visual kartu portofolio
-│   │   ├── PortfolioSection.tsx       # Grid portofolio 3 kolom
-│   │   ├── Reveal.tsx                 # Wrapper animasi scroll reveal
-│   │   ├── ServicesSection.tsx        # Kartu layanan interaktif melebar
-│   │   ├── StatsSection.tsx           # Bento grid statistik dengan count-up
-│   │   ├── TestimonialsSection.tsx    # Carousel alur kerja + struktur tim (#workflow)
-│   │   ├── TrustStrip.tsx             # Strip 6 sektor target UMKM & B2B
-│   │   └── WhatsAppWidget.tsx         # Widget konsultasi WhatsApp melayang
-│   └── data/
-│       └── homepage.ts                # Pusat data layanan, paket, alur kerja, tim & portofolio
-├── package.json
-└── README.md
-```
+- **Framework:** Next.js `16.4.6` (App Router, Turbopack, `cacheComponents: true`)
+- **UI Library:** React `19.3.0` + `lucide-react`
+- **Bahasa:** TypeScript `^5` (Strict mode)
+- **Styling:** Tailwind CSS `4.3.3` (`@tailwindcss/turbopack`)
+- **Testing:** Node.js native test runner (`node --test`)
 
 ---
 
-## Cara Menjalankan Secara Lokal
-
-### Prasyarat
-
-- **Node.js** versi 20 atau lebih baru
-- **npm**
-
-### Langkah Instalasi
+## Menjalankan & Menguji Proyek
 
 ```bash
-git clone https://github.com/alifarda126/NalarDigital.git
-cd NalarDigital
 npm install
 npm run dev
 ```
 
-Buka [http://localhost:3000](http://localhost:3000) di browser untuk melihat hasilnya.
+Buka [http://localhost:3000](http://localhost:3000) untuk beranda, dan [http://localhost:3000/assets](http://localhost:3000/assets) untuk Asset & Portofolio Studio.
 
-### Perintah yang Tersedia
+### Perintah Pengembangan & Kualitas Kode
 
 | Perintah | Deskripsi |
 | --- | --- |
 | `npm run dev` | Menjalankan server development Next.js (Turbopack) |
-| `npm run lint` | Menjalankan pemeriksaan ESLint pada seluruh proyek |
+| `npm test` | Menjalankan unit test validasi, keamanan upload, dan filter portofolio |
+| `npm run typecheck` | Pemeriksaan tipe TypeScript penuh (`tsc --noEmit`) |
+| `npm run lint` | Pemeriksaan ESLint pada seluruh codebase |
 | `npm run build` | Membangun bundle produksi (`next build`) |
-| `npm run start` | Menjalankan server produksi dari hasil build (`next start`) |
 
 ---
 
-## Panduan Kustomisasi Cepat
+## Struktur Modul Utama
 
-1. **Mengisi Portofolio Proyek Tim**  
-   Bagian portofolio sengaja masih menggunakan 12 data *placeholder*. Untuk menggantinya dengan proyek semester tim Anda, perbarui array `PORTFOLIO_ITEMS` (serta `CLIENT_LOGOS` jika diperlukan) di `src/data/homepage.ts`, lalu sesuaikan tampilan mockup di `src/components/PortfolioMockup.tsx`.
-2. **Mengubah Layanan, Paket Harga, Alur Kerja & Struktur Tim**  
-   Seluruh teks utama dan daftar data (`HERO_HEADLINE`, `TARGET_SECTORS`, `SERVICES`, `STATS`, `PRICING_PACKAGES`, `WORKFLOW_STEPS`, `TEAM_ROLES`, dan `WHATSAPP_OPTIONS`) terpusat di `src/data/homepage.ts`.
-3. **Mengganti Kontak & Tautan WhatsApp / Media Sosial**  
-   - Perbarui alamat email (`halo@nalardigital.id`), nomor telepon (`+62 812-0000-0000`), dan URL profil Medium, LinkedIn, serta Instagram di `src/components/Footer.tsx`.
-   - Arahkan tombol **Chat dengan kami** pada `src/components/WhatsAppWidget.tsx` ke URL `https://wa.me/<nomor>?text=...` saat deployment produksi.
-
----
-
-## Tim Inti (D3 Teknologi Informasi Universitas Brawijaya)
-
-| Peran | Jumlah | Tanggung Jawab Utama |
-| --- | --- | --- |
-| **Lead Fullstack Developer** | 1 Orang | Pengembangan website & aplikasi mobile, optimasi performa, keamanan, serta implementasi Technical SEO. |
-| **Creative, Branding & UI/UX Designer (FE)** | 2 Orang | Identitas visual, konten media sosial berbasis data, riset serta desain Figma, dan pengembangan front-end. |
-| **Business Development & Project Manager** | 2 Orang | Riset prospek, pengelolaan CRM, komunikasi klien, serta *Quality Control* terhadap mitra *freelancer* SEO/SEM/ASO. |
+```text
+NalarDigital/
+├── public/
+│   ├── assets/portfolio/           # Asset gambar portofolio (unggah via /assets atau manual)
+│   └── images/
+│       ├── brand/                  # Logo resmi ND (transparent, dark, light)
+│       └── hero-team.jpg
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   ├── assets/route.ts     # REST API daftar, upload (magic-byte check) & hapus asset
+│   │   │   └── portfolios/route.ts # REST API CRUD src/data/portfolios.json (atomic write)
+│   │   ├── assets/page.tsx         # Halaman Asset & Portofolio Studio (/assets)
+│   │   ├── globals.css             # Design tokens terpusat & animasi
+│   │   ├── icon.png                # Favicon logo ND
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── assets/                 # Komponen Studio Asset & Manajemen Portofolio
+│   │   ├── BrandLogo.tsx           # Lockup resmi logo ND + wordmark
+│   │   ├── PortfolioSection.tsx    # Grid portofolio dengan filter bidang/platform/bahasa
+│   │   ├── PortfolioDetailModal.tsx
+│   │   └── ...                     # Section landing page lainnya
+│   ├── config/
+│   │   ├── portfolio-taxonomy.ts   # Konfigurasi kategori, platform & saran bahasa pemrograman
+│   │   └── theme.ts                # Token warna & Brand Kit resmi
+│   ├── data/
+│   │   ├── homepage.ts             # Data layanan, paket, alur kerja & tim inti
+│   │   └── portfolios.json         # Sumber data portofolio (editable via /assets & kode)
+│   ├── hooks/
+│   │   └── usePortfolioStore.ts    # Hybrid store (Disk API <-> localStorage + sync lintas tab)
+│   ├── lib/
+│   │   ├── portfolio-validation.ts # Validasi input, sanitasi URL, magic-byte check & filter
+│   │   ├── portfolio-client-store.ts
+│   │   └── server/local-cms.ts     # Operasi baca/tulis file atomik & proteksi path traversal
+│   └── types/
+│       └── portfolio.ts            # Definisi tipe TypeScript ketat
+└── tests/
+    └── portfolio-validation.test.ts
+```
 
 ---
 

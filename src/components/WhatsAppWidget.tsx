@@ -58,23 +58,22 @@ export function WhatsAppWidget() {
       ref={rootRef}
       className="pointer-events-none fixed right-4 bottom-4 z-50 min-[769px]:right-6 min-[769px]:bottom-6"
     >
-      {/* Floating panel sits outside normal flow so closed container footprint is strictly the 56x56 FAB */}
       <div
         role="dialog"
         aria-hidden={!open}
         aria-label="Konsultasi WhatsApp Nalar Digital"
-        className={`absolute right-0 bottom-[70px] origin-bottom-right w-[328px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border border-[#E4E4E7] bg-[#FFFFFF] shadow-[0_24px_60px_rgba(17,17,17,0.22)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`absolute right-0 bottom-[70px] origin-bottom-right w-[328px] max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border border-brand-muted bg-white shadow-[0_24px_60px_rgba(37,41,67,0.22)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           open
             ? "pointer-events-auto visible opacity-100 scale-100 translate-y-0"
             : "pointer-events-none invisible opacity-0 scale-95 translate-y-3"
         }`}
       >
-        <div className="flex items-center justify-between bg-[#25D366] px-4 py-3.5 text-[#FFFFFF]">
+        <div className="flex items-center justify-between bg-[#25D366] px-4 py-3.5 text-white">
           <div>
             <p className="font-heading text-sm font-bold">
               Halo 👋 Ada yang bisa kami bantu?
             </p>
-            <p className="text-[11px] text-[#FFFFFF]/90">
+            <p className="text-[11px] text-white/90">
               Pilih topik untuk mulai konsultasi dengan Nalar Digital
             </p>
           </div>
@@ -83,7 +82,7 @@ export function WhatsAppWidget() {
             tabIndex={open ? 0 : -1}
             aria-label="Close WhatsApp panel"
             onClick={() => setOpen(false)}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-[#FFFFFF] transition-colors hover:bg-white/25 touch-manipulation cursor-pointer"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/15 text-white transition-colors hover:bg-white/25 touch-manipulation cursor-pointer"
           >
             <X className="h-4 w-4" />
           </button>
@@ -120,16 +119,16 @@ export function WhatsAppWidget() {
                     onClick={() => setSelectedId(option.id)}
                     className={`flex w-full items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left text-xs transition-colors touch-manipulation cursor-pointer ${
                       isSelected
-                        ? "border-[#25D366] bg-[#F0FDF4] font-semibold text-[#000000]"
-                        : "border-[#EFEFF5] bg-[#FFFFFF] text-[#3F3F46] hover:bg-[#FAFAFA]"
+                        ? "border-[#25D366] bg-[#F0FDF4] font-semibold text-brand-navy"
+                        : "border-brand-muted bg-white text-[#454A66] hover:bg-brand-canvas"
                     }`}
                   >
                     <span>{option.label}</span>
                     <span
                       className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border transition-colors ${
                         isSelected
-                          ? "border-[#25D366] bg-[#25D366] text-[#FFFFFF]"
-                          : "border-[#D4D4D8]"
+                          ? "border-[#25D366] bg-[#25D366] text-white"
+                          : "border-brand-muted"
                       }`}
                     >
                       {isSelected && <Check className="h-2.5 w-2.5" />}
@@ -144,7 +143,7 @@ export function WhatsAppWidget() {
             type="button"
             tabIndex={open ? 0 : -1}
             onClick={() => setStarted(true)}
-            className="mt-3.5 flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-2.5 font-heading text-sm font-bold text-[#FFFFFF] shadow-sm transition-all duration-200 hover:bg-[#1EBE5D] active:scale-[0.98] touch-manipulation cursor-pointer"
+            className="mt-3.5 flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-2.5 font-heading text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#1EBE5D] active:scale-[0.98] touch-manipulation cursor-pointer"
           >
             <Send className="h-4 w-4" />
             Chat dengan kami
@@ -157,7 +156,7 @@ export function WhatsAppWidget() {
         aria-label={open ? "Close WhatsApp widget" : "Open WhatsApp widget"}
         aria-expanded={open}
         onClick={handleToggle}
-        className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-[#FFFFFF] shadow-[0_12px_30px_rgba(37,211,102,0.4)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105 active:scale-95 touch-manipulation cursor-pointer"
+        className="pointer-events-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-[0_12px_30px_rgba(37,211,102,0.4)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-105 active:scale-95 touch-manipulation cursor-pointer"
       >
         <span
           className={`transition-transform duration-300 ${

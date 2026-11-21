@@ -25,7 +25,7 @@ export function HomePageClient() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FBFBFB] text-[#000000]">
+    <div className="min-h-screen flex flex-col bg-brand-canvas text-brand-navy">
       {/* 1. Navbar */}
       <Navbar
         onSelectService={setActiveServiceIndex}
@@ -46,8 +46,8 @@ export function HomePageClient() {
           onDiscoverMore={handleOpenContact}
         />
 
-        {/* 5. Portofolio (dibiarkan utuh - grid 3 kolom) */}
-        <PortfolioSection />
+        {/* 5. Portofolio Interaktif (Filter Bidang, Platform, Bahasa & Asset) */}
+        <PortfolioSection onOpenContact={handleOpenContact} />
 
         {/* 6. Statistik & Keunggulan Nalar Digital */}
         <StatsSection />

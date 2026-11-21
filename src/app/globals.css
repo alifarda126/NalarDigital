@@ -1,23 +1,36 @@
 @import "tailwindcss";
 
 :root {
-  --color-primary: #580AC7;
-  --color-bg: #FBFBFB;
+  --color-primary: #3A4EFB;
+  --color-primary-end: #33A4FA;
+  --color-primary-hover: #2C3EDB;
+  --color-accent-lime: #E3FF3B;
+  --color-accent-lime-hover: #D4F229;
+  --color-navy: #252943;
+  --color-navy-deep: #1B1E35;
+  --color-surface-muted: #DEE0ED;
+  --color-surface-soft: #EEF0F8;
+  --color-bg: #F7F8FC;
   --color-surface: #FFFFFF;
-  --color-service-idle: #F4EEFC;
-  --color-service-active: #FCFCFC;
-  --color-trust-bg: #F3F3F9;
-  --color-footer-bg: #111111;
-  --color-ink: #000000;
-  --color-peach: #FCEBE6;
-  --color-teal: #137D88;
+  --color-ink: #252943;
+  --color-ink-muted: #525775;
   --color-whatsapp: #25D366;
+  --gradient-brand: linear-gradient(135deg, #3A4EFB 0%, #33A4FA 100%);
+  --gradient-brand-hover: linear-gradient(135deg, #2C3EDB 0%, #2492E8 100%);
   --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @theme inline {
   --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-rubik), ui-sans-serif, system-ui, sans-serif;
+  --color-brand-primary: var(--color-primary);
+  --color-brand-sky: var(--color-primary-end);
+  --color-brand-lime: var(--color-accent-lime);
+  --color-brand-navy: var(--color-navy);
+  --color-brand-navy-deep: var(--color-navy-deep);
+  --color-brand-muted: var(--color-surface-muted);
+  --color-brand-soft: var(--color-surface-soft);
+  --color-brand-canvas: var(--color-bg);
 }
 
 html {
@@ -27,6 +40,32 @@ html {
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
+}
+
+.bg-brand-gradient {
+  background-image: var(--gradient-brand);
+}
+
+.bg-brand-gradient:hover {
+  background-image: var(--gradient-brand-hover);
+}
+
+.text-brand-gradient {
+  background-image: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-checker-preview {
+  background-color: #f4f5fb;
+  background-image:
+    linear-gradient(45deg, #dee0ed 25%, transparent 25%),
+    linear-gradient(-45deg, #dee0ed 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #dee0ed 75%),
+    linear-gradient(-45deg, transparent 75%, #dee0ed 75%);
+  background-size: 16px 16px;
+  background-position: 0 0, 0 8px, 8px -8px, -8px 0;
 }
 
 /* Smooth GPU-composited scroll reveal */

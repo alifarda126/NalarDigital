@@ -31,42 +31,42 @@ function ContactModalBody({
 
   return (
     <div
-      className="relative max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-3xl bg-[#FFFFFF] p-6 shadow-2xl min-[769px]:p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
+      className="relative max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-3xl border border-brand-muted bg-white p-6 shadow-2xl min-[769px]:p-8 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]"
       onClick={(event) => event.stopPropagation()}
     >
       <button
         type="button"
         aria-label="Close modal"
         onClick={onClose}
-        className="absolute top-5 right-5 flex h-9 w-9 items-center justify-center rounded-full bg-[#F3F3F9] text-[#000000] transition-colors hover:bg-[#F4EEFC] hover:text-[#580AC7] cursor-pointer"
+        className="absolute top-5 right-5 flex h-9 w-9 items-center justify-center rounded-full bg-brand-soft text-brand-navy transition-colors hover:bg-brand-primary hover:text-white cursor-pointer"
       >
         <X className="h-4 w-4" />
       </button>
 
       <h2
         id="contact-modal-title"
-        className="pr-8 font-heading text-xl font-bold text-[#000000] min-[480px]:text-2xl"
+        className="pr-8 font-heading text-xl font-bold text-brand-navy min-[480px]:text-2xl"
       >
         Konsultasi &amp; Mini-Audit Gratis
       </h2>
-      <p className="mt-1.5 text-sm text-[#52525B]">
+      <p className="mt-1.5 text-sm text-[#525775]">
         Tim Nalar Digital akan menganalisis kondisi website, branding, dan media sosial bisnis Anda sebelum sesi diskusi.
       </p>
 
       {submitted ? (
-        <div className="mt-6 rounded-2xl border border-[#D9C6FA] bg-[#F4EEFC] p-6 text-center">
-          <CheckCircle2 className="mx-auto h-10 w-10 text-[#580AC7]" />
-          <h3 className="mt-3 font-heading text-lg font-bold text-[#000000]">
+        <div className="mt-6 rounded-2xl border border-brand-primary/25 bg-brand-soft p-6 text-center">
+          <CheckCircle2 className="mx-auto h-10 w-10 text-brand-primary" />
+          <h3 className="mt-3 font-heading text-lg font-bold text-brand-navy">
             Permintaan Konsultasi Diterima
           </h3>
-          <p className="mt-1.5 text-sm text-[#3F3F46]">
+          <p className="mt-1.5 text-sm text-[#454A66]">
             Terima kasih{name ? `, ${name}` : ""}. Tim Business Development Nalar Digital akan menghubungi Anda terkait{" "}
-            <span className="font-semibold text-[#580AC7]">{topic}</span> ({sector}).
+            <span className="font-semibold text-brand-primary">{topic}</span> ({sector}).
           </p>
           <button
             type="button"
             onClick={onClose}
-            className="mt-5 rounded-lg bg-[#580AC7] px-6 py-2.5 font-heading text-sm font-semibold text-[#FFFFFF] transition-colors hover:bg-[#4707A3] cursor-pointer"
+            className="mt-5 rounded-xl bg-brand-gradient px-6 py-2.5 font-heading text-sm font-semibold text-white transition-opacity hover:opacity-95 cursor-pointer"
           >
             Selesai
           </button>
@@ -76,7 +76,7 @@ function ContactModalBody({
           <div>
             <label
               htmlFor="contact-name"
-              className="block font-heading text-xs font-semibold uppercase tracking-wide text-[#27272A]"
+              className="block font-heading text-xs font-semibold uppercase tracking-wide text-brand-navy"
             >
               Nama Lengkap / Bisnis
             </label>
@@ -87,7 +87,7 @@ function ContactModalBody({
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="cth. Raka Pratama — Kopi Nusantara"
-              className="mt-1 w-full rounded-xl border border-[#D4D4D8] px-3.5 py-2.5 text-sm text-[#000000] focus:border-[#580AC7] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-brand-muted px-3.5 py-2.5 text-sm text-brand-navy focus:border-brand-primary focus:outline-none"
             />
           </div>
 
@@ -95,7 +95,7 @@ function ContactModalBody({
             <div>
               <label
                 htmlFor="contact-email"
-                className="block font-heading text-xs font-semibold uppercase tracking-wide text-[#27272A]"
+                className="block font-heading text-xs font-semibold uppercase tracking-wide text-brand-navy"
               >
                 Email / WhatsApp Bisnis
               </label>
@@ -106,14 +106,14 @@ function ContactModalBody({
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
                 placeholder="halo@bisnisanda.id"
-                className="mt-1 w-full rounded-xl border border-[#D4D4D8] px-3.5 py-2.5 text-sm text-[#000000] focus:border-[#580AC7] focus:outline-none"
+                className="mt-1 w-full rounded-xl border border-brand-muted px-3.5 py-2.5 text-sm text-brand-navy focus:border-brand-primary focus:outline-none"
               />
             </div>
 
             <div>
               <label
                 htmlFor="contact-sector"
-                className="block font-heading text-xs font-semibold uppercase tracking-wide text-[#27272A]"
+                className="block font-heading text-xs font-semibold uppercase tracking-wide text-brand-navy"
               >
                 Bidang Usaha
               </label>
@@ -121,9 +121,10 @@ function ContactModalBody({
                 id="contact-sector"
                 value={sector}
                 onChange={(e) => setSector(e.target.value)}
-                className="mt-1 w-full rounded-xl border border-[#D4D4D8] bg-[#FFFFFF] px-3.5 py-2.5 text-sm text-[#000000] focus:border-[#580AC7] focus:outline-none"
+                className="mt-1 w-full rounded-xl border border-brand-muted bg-white px-3.5 py-2.5 text-sm text-brand-navy focus:border-brand-primary focus:outline-none"
               >
                 <option value="Food & Beverage (F&B)">Food &amp; Beverage (F&B)</option>
+                <option value="Keuangan & Fintech">Keuangan &amp; Fintech</option>
                 <option value="Klinik Kesehatan">Klinik Kesehatan</option>
                 <option value="Jasa Profesional">Jasa Profesional</option>
                 <option value="Properti">Properti</option>
@@ -136,7 +137,7 @@ function ContactModalBody({
           <div>
             <label
               htmlFor="contact-topic"
-              className="block font-heading text-xs font-semibold uppercase tracking-wide text-[#27272A]"
+              className="block font-heading text-xs font-semibold uppercase tracking-wide text-brand-navy"
             >
               Layanan / Paket Diminati
             </label>
@@ -144,11 +145,16 @@ function ContactModalBody({
               id="contact-topic"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              className="mt-1 w-full rounded-xl border border-[#D4D4D8] bg-[#FFFFFF] px-3.5 py-2.5 text-sm text-[#000000] focus:border-[#580AC7] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-brand-muted bg-white px-3.5 py-2.5 text-sm text-brand-navy focus:border-brand-primary focus:outline-none"
             >
               <option value="Discovery & Mini-Audit Gratis">
                 Discovery &amp; Mini-Audit Gratis
               </option>
+              {!PRICING_PACKAGES.some((p) => p.name === initialTopic) &&
+                !SERVICES.some((s) => s.title === initialTopic) &&
+                initialTopic !== "Discovery & Mini-Audit Gratis" && (
+                  <option value={initialTopic}>{initialTopic}</option>
+                )}
               {PRICING_PACKAGES.map((pkg) => (
                 <option key={pkg.id} value={pkg.name}>
                   {pkg.name} ({pkg.price})
@@ -165,7 +171,7 @@ function ContactModalBody({
           <div>
             <label
               htmlFor="contact-message"
-              className="block font-heading text-xs font-semibold uppercase tracking-wide text-[#27272A]"
+              className="block font-heading text-xs font-semibold uppercase tracking-wide text-brand-navy"
             >
               Ceritakan Kendala / Target Anda
             </label>
@@ -176,13 +182,13 @@ function ContactModalBody({
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Sertakan link website atau Instagram jika ingin langsung diaudit..."
-              className="mt-1 w-full rounded-xl border border-[#D4D4D8] px-3.5 py-2.5 text-sm text-[#000000] focus:border-[#580AC7] focus:outline-none"
+              className="mt-1 w-full rounded-xl border border-brand-muted px-3.5 py-2.5 text-sm text-brand-navy focus:border-brand-primary focus:outline-none"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full rounded-xl bg-[#580AC7] py-3 font-heading text-sm font-semibold text-[#FFFFFF] shadow-[0_10px_24px_rgba(88,10,199,0.25)] transition-all duration-200 hover:bg-[#4707A3] active:scale-[0.98] cursor-pointer"
+            className="w-full rounded-xl bg-brand-gradient py-3 font-heading text-sm font-semibold text-white shadow-[0_10px_24px_rgba(58,78,251,0.28)] transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.98] cursor-pointer"
           >
             Kirim Permintaan Konsultasi
           </button>
@@ -221,7 +227,7 @@ export function ContactModal({
       role="dialog"
       aria-modal="true"
       aria-labelledby="contact-modal-title"
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-[#111111]/60 p-4 backdrop-blur-xs"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-brand-navy/60 p-4 backdrop-blur-xs"
       onClick={onClose}
     >
       <ContactModalBody

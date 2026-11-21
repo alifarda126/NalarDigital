@@ -1,118 +1,299 @@
-import { HAPPY_CLIENTS, PORTFOLIO_ITEMS, type PlatformType } from "@/data/homepage";
-import { ClientLogoMark } from "./ClientLogoMark";
+"use client";
+
+import Link from "next/link";
+import { useMemo, useState } from "react";
+import {
+  ArrowUpRight,
+  Code2,
+  FolderPlus,
+  RotateCcw,
+  Search,
+  SlidersHorizontal,
+} from "lucide-react";
+import { APP_CATEGORIES, PLATFORM_OPTIONS } from "@/config/portfolio-taxonomy";
+import { usePortfolioStore } from "@/hooks/usePortfolioStore";
+import { filterPortfolios } from "@/lib/portfolio-validation";
+import type {
+  AppCategoryId,
+  PlatformId,
+  PortfolioItem,
+} from "@/types/portfolio";
 import { OrganicPetalAccent } from "./EditorialIllustrations";
+import { PlatformIcon } from "./PlatformIcon";
+import { PortfolioDetailModal } from "./PortfolioDetailModal";
 import { PortfolioMockup } from "./PortfolioMockup";
 
-const CLIENT_NAME_BY_ID = Object.fromEntries(
-  HAPPY_CLIENTS.map((c) => [c.id, c.name])
-);
-
-function PlatformIcon({ platform }: { platform: PlatformType }) {
-  if (platform === "android") {
-    return (
-      <span
-        title="Android"
-        aria-label="Android"
-        className="inline-flex items-center justify-center text-[#22C55E]"
-      >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M17.6 9.48l1.84-3.18a.58.58 0 0 0-.21-.79.58.58 0 0 0-.79.21l-1.87 3.24a11.46 11.46 0 0 0-9.14 0L5.56 5.72a.58.58 0 0 0-.79-.21.58.58 0 0 0-.21.79l1.84 3.18A10.78 10.78 0 0 0 1 18h22a10.78 10.78 0 0 0-5.4-8.52zM7 15a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 7 15zm10 0a1.25 1.25 0 1 1 1.25-1.25A1.25 1.25 0 0 1 17 15z" />
-        </svg>
-      </span>
-    );
-  }
-
-  if (platform === "ios") {
-    return (
-      <span
-        title="iOS"
-        aria-label="iOS"
-        className="inline-flex items-center justify-center text-[#454545]"
-      >
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d="M16.36 12.76c0-2.31 1.88-3.42 1.97-3.47-1.08-1.57-2.75-1.79-3.34-1.81-1.41-.14-2.77.84-3.49.84-.73 0-1.84-.82-3.03-.8-1.55.02-2.99.91-3.79 2.3-1.63 2.82-.42 6.99 1.15 9.27.78 1.12 1.7 2.37 2.9 2.33 1.17-.05 1.62-.75 3.04-.75 1.42 0 1.83.75 3.05.72 1.26-.02 2.05-1.13 2.81-2.26.9-1.31 1.26-2.59 1.28-2.66-.03-.01-2.55-.98-2.55-3.71zM14.07 6.02c.64-.78 1.08-1.86.96-2.94-.93.04-2.06.62-2.72 1.4-.58.68-1.1 1.79-.96 2.85 1.04.08 2.09-.53 2.72-1.31z" />
-        </svg>
-      </span>
-    );
-  }
-
-  return (
-    <span
-      title="Web"
-      aria-label="Web"
-      className="inline-flex items-center justify-center text-[#580AC7]"
-    >
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3.6 9h16.8M3.6 15h16.8M12 3a14.5 14.5 0 0 1 0 18M12 3a14.5 14.5 0 0 0 0 18" />
-      </svg>
-    </span>
-  );
+interface PortfolioSectionProps {
+  onOpenContact?: (topic?: string) => void;
 }
 
-export function PortfolioSection() {
+export function PortfolioSection({ onOpenContact }: PortfolioSectionProps) {
+  const { portfolios } = usePortfolioStore();
+  const [selectedCategory, setSelectedCategory] = useState<
+    AppCategoryId | "all"
+  >("all");
+  const [selectedPlatform, setSelectedPlatform] = useState<PlatformId | "all">(
+    "all"
+  );
+  const [searchQuery, setSearchQuery] = useState("");
+  const [activeDetail, setActiveDetail] = useState<PortfolioItem | null>(null);
+
+  const filteredItems = useMemo(
+    () =>
+      filterPortfolios(portfolios, {
+        categoryId: selectedCategory,
+        platform: selectedPlatform,
+        search: searchQuery,
+      }),
+    [portfolios, selectedCategory, selectedPlatform, searchQuery]
+  );
+
+  const hasActiveFilter =
+    selectedCategory !== "all" ||
+    selectedPlatform !== "all" ||
+    searchQuery.trim().length > 0;
+
+  const resetFilters = () => {
+    setSelectedCategory("all");
+    setSelectedPlatform("all");
+    setSearchQuery("");
+  };
+
   return (
     <section
       id="portfolio"
       aria-labelledby="portfolio-heading"
-      className="scroll-mt-20 relative overflow-x-clip bg-[#FFFFFF] py-16 min-[1025px]:py-24"
+      className="scroll-mt-20 relative overflow-x-clip bg-white py-16 min-[1025px]:py-24"
     >
       <OrganicPetalAccent side="left" />
       <OrganicPetalAccent side="right" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-5 min-[769px]:px-8 min-[1025px]:px-10">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2
-            id="portfolio-heading"
-            className="font-heading text-[28px] leading-tight font-bold text-[#000000] min-[1025px]:text-[34px]"
+        {/* Section header + Studio Asset shortcut */}
+        <div className="flex flex-col items-center justify-between gap-5 text-center min-[1025px]:flex-row min-[1025px]:items-end min-[1025px]:text-left">
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-soft px-3 py-1 font-heading text-xs font-bold text-brand-primary">
+              Portofolio &amp; Studi Kasus
+            </span>
+            <h2
+              id="portfolio-heading"
+              className="mt-3 font-heading text-[26px] leading-tight font-bold text-brand-navy min-[769px]:text-[30px] min-[1025px]:text-[36px]"
+            >
+              Karya Digital Lintas Industri &amp; Platform
+            </h2>
+            <p className="mt-2.5 text-sm leading-relaxed text-[#525775] min-[1025px]:text-base">
+              Eksplorasi solusi aplikasi keuangan, jasa profesional, F&amp;B, kesehatan, hingga branding yang dirancang berbasis data — filter berdasarkan bidang, platform, maupun bahasa pemrograman.
+            </p>
+          </div>
+
+          <Link
+            href="/assets"
+            className="inline-flex min-h-[44px] shrink-0 items-center gap-2 rounded-xl bg-brand-navy px-5 py-2.5 font-heading text-xs min-[480px]:text-sm font-semibold text-white shadow-[0_12px_28px_rgba(37,41,67,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-primary"
           >
-            We build ONLY what customers love
-          </h2>
-          <p className="mt-3 text-base text-[#52525B] min-[1025px]:text-lg">
-            Beautifully designed, passionately engineered, and incredibly reliable
-          </p>
+            <FolderPlus className="h-4 w-4 text-brand-lime" />
+            <span>Tambah Portofolio &amp; Asset</span>
+            <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
 
-        {/* 3-column grid on desktop (>1024px), 2 columns on tablet (769-1024px), 1 column on mobile (<=768px) */}
-        <div className="mt-12 grid grid-cols-1 gap-7 min-[769px]:grid-cols-2 min-[1025px]:grid-cols-3">
-          {PORTFOLIO_ITEMS.map((item) => {
-            const clientLabel = CLIENT_NAME_BY_ID[item.clientId] ?? item.name;
-            return (
+        {/* Interactive Filter Panel */}
+        <div className="mt-8 rounded-2xl border border-brand-muted/80 bg-brand-canvas p-4 min-[769px]:p-5">
+          <div className="flex flex-col gap-3.5 min-[1025px]:flex-row min-[1025px]:items-center min-[1025px]:justify-between">
+            {/* Search by title / client / programming language */}
+            <div className="relative flex-1 min-[1025px]:max-w-sm">
+              <Search className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-[#525775]" />
+              <input
+                type="search"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                aria-label="Cari portofolio atau bahasa pemrograman"
+                placeholder="Cari proyek, kategori, atau bahasa (mis. Kotlin, Flutter)..."
+                className="w-full rounded-xl border border-brand-muted bg-white py-2.5 pr-3.5 pl-10 text-sm text-brand-navy placeholder:text-[#787E9C] focus:border-brand-primary focus:outline-none"
+              />
+            </div>
+
+            {/* Platform filter pills */}
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="mr-1 inline-flex items-center gap-1 font-heading text-xs font-semibold text-[#525775]">
+                <SlidersHorizontal className="h-3.5 w-3.5" />
+                Platform:
+              </span>
+              <button
+                type="button"
+                onClick={() => setSelectedPlatform("all")}
+                className={`rounded-lg px-3 py-1.5 font-heading text-xs font-semibold transition-colors cursor-pointer ${
+                  selectedPlatform === "all"
+                    ? "bg-brand-navy text-brand-lime"
+                    : "bg-white text-[#525775] border border-brand-muted hover:border-brand-primary hover:text-brand-primary"
+                }`}
+              >
+                Semua
+              </button>
+              {PLATFORM_OPTIONS.map((platform) => (
+                <button
+                  key={platform.id}
+                  type="button"
+                  onClick={() => setSelectedPlatform(platform.id)}
+                  className={`rounded-lg px-3 py-1.5 font-heading text-xs font-semibold transition-colors cursor-pointer ${
+                    selectedPlatform === platform.id
+                      ? "bg-brand-primary text-white shadow-[0_6px_16px_rgba(58,78,251,0.28)]"
+                      : "bg-white text-[#525775] border border-brand-muted hover:border-brand-primary hover:text-brand-primary"
+                  }`}
+                >
+                  {platform.shortLabel}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Category filter pills */}
+          <div className="mt-3.5 flex flex-wrap items-center gap-2 border-t border-brand-muted/70 pt-3.5">
+            <button
+              type="button"
+              onClick={() => setSelectedCategory("all")}
+              className={`rounded-full px-3.5 py-1.5 font-heading text-xs font-semibold transition-all cursor-pointer ${
+                selectedCategory === "all"
+                  ? "bg-brand-gradient text-white shadow-[0_6px_16px_rgba(58,78,251,0.25)]"
+                  : "bg-white text-brand-navy border border-brand-muted hover:border-brand-sky"
+              }`}
+            >
+              Semua Bidang ({portfolios.length})
+            </button>
+            {APP_CATEGORIES.map((category) => {
+              const count = portfolios.filter(
+                (p) => p.categoryId === category.id
+              ).length;
+              const isSelected = selectedCategory === category.id;
+
+              return (
+                <button
+                  key={category.id}
+                  type="button"
+                  onClick={() => setSelectedCategory(category.id)}
+                  className={`rounded-full px-3.5 py-1.5 font-heading text-xs font-semibold transition-all cursor-pointer ${
+                    isSelected
+                      ? "bg-brand-gradient text-white shadow-[0_6px_16px_rgba(58,78,251,0.25)]"
+                      : "bg-white text-[#454A66] border border-brand-muted hover:border-brand-sky hover:text-brand-primary"
+                  }`}
+                >
+                  {category.shortLabel}
+                  {count > 0 ? ` (${count})` : ""}
+                </button>
+              );
+            })}
+
+            {hasActiveFilter && (
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="ml-auto inline-flex items-center gap-1 rounded-full bg-brand-lime px-3 py-1.5 font-heading text-xs font-bold text-brand-navy transition-opacity hover:opacity-90 cursor-pointer"
+              >
+                <RotateCcw className="h-3 w-3" />
+                Reset Filter
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Portfolio Grid or Empty State */}
+        {filteredItems.length === 0 ? (
+          <div className="mt-10 rounded-2xl border border-dashed border-brand-muted bg-brand-canvas p-10 text-center">
+            <p className="font-heading text-lg font-bold text-brand-navy">
+              Belum ada portofolio yang cocok dengan filter ini
+            </p>
+            <p className="mx-auto mt-1.5 max-w-md text-sm text-[#525775]">
+              Coba ubah kata kunci pencarian atau tambahkan proyek baru untuk bidang &amp; bahasa ini melalui halaman Studio Asset.
+            </p>
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
+              <button
+                type="button"
+                onClick={resetFilters}
+                className="rounded-xl border border-brand-muted bg-white px-4 py-2.5 font-heading text-sm font-semibold text-brand-navy hover:border-brand-primary hover:text-brand-primary cursor-pointer"
+              >
+                Tampilkan Semua
+              </button>
+              <Link
+                href="/assets"
+                className="inline-flex items-center gap-2 rounded-xl bg-brand-gradient px-5 py-2.5 font-heading text-sm font-semibold text-white"
+              >
+                <FolderPlus className="h-4 w-4" />
+                Tambah Portofolio Baru
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-10 grid grid-cols-1 gap-7 min-[769px]:grid-cols-2 min-[1025px]:grid-cols-3">
+            {filteredItems.map((item) => (
               <article
                 key={item.id}
-                className="group flex flex-col rounded-2xl border border-[#F1F1F6] bg-[#FFFFFF] p-4 shadow-[0_10px_30px_rgba(17,17,17,0.05)] transition-all duration-200 hover:-translate-y-1 hover:border-[#D9C6FA] hover:shadow-[0_20px_44px_rgba(88,10,199,0.1)]"
+                onClick={() => setActiveDetail(item)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    setActiveDetail(item);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                className="group flex flex-col rounded-2xl border border-brand-muted/80 bg-white p-4 text-left shadow-[0_10px_30px_rgba(37,41,67,0.05)] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:border-brand-sky hover:shadow-[0_20px_44px_rgba(58,78,251,0.14)] cursor-pointer"
               >
                 <PortfolioMockup item={item} />
 
                 <div className="flex flex-1 flex-col justify-between px-1 pt-4 pb-1">
                   <div>
-                    <ClientLogoMark
-                      id={item.clientId}
-                      name={clientLabel}
-                      variant="mini"
-                    />
-                    <h3 className="mt-2 font-heading text-lg font-bold text-[#000000]">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="inline-flex items-center rounded-full bg-brand-soft px-2.5 py-0.5 font-heading text-[11px] font-bold text-brand-primary">
+                        {item.categoryLabel}
+                      </span>
+                      <div className="inline-flex items-center gap-1">
+                        {item.platforms.map((platform) => (
+                          <PlatformIcon key={platform} platform={platform} />
+                        ))}
+                      </div>
+                    </div>
+
+                    <h3 className="mt-2.5 font-heading text-[17px] leading-snug font-bold text-brand-navy group-hover:text-brand-primary transition-colors line-clamp-2">
                       {item.name}
                     </h3>
+
+                    <p className="mt-1 text-xs font-semibold text-[#525775]">
+                      {item.clientName}
+                    </p>
+
+                    <p className="mt-2 text-[13px] leading-relaxed text-[#525775] line-clamp-2">
+                      {item.summary}
+                    </p>
                   </div>
 
-                  <div className="mt-2 flex flex-wrap items-center gap-2 text-[13px] font-medium text-[#52525B]">
-                    <span>{item.category}</span>
-                    <span aria-hidden="true" className="text-[#A1A1AA]">
-                      •
-                    </span>
-                    <div className="inline-flex items-center gap-1.5">
-                      {item.platforms.map((platform) => (
-                        <PlatformIcon key={platform} platform={platform} />
-                      ))}
-                    </div>
+                  {/* Tech Stack / Bahasa Pemrograman badges */}
+                  <div className="mt-4 flex flex-wrap items-center gap-1.5 border-t border-brand-muted/60 pt-3">
+                    <Code2 className="h-3.5 w-3.5 shrink-0 text-brand-sky" />
+                    {item.techStack.slice(0, 4).map((tech) => (
+                      <span
+                        key={tech}
+                        className="rounded-md bg-brand-canvas px-2 py-0.5 font-heading text-[11px] font-semibold text-brand-navy border border-brand-muted/70"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                    {item.techStack.length > 4 && (
+                      <span className="font-heading text-[11px] font-semibold text-[#525775]">
+                        +{item.techStack.length - 4}
+                      </span>
+                    )}
                   </div>
                 </div>
               </article>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
+
+      <PortfolioDetailModal
+        item={activeDetail}
+        onClose={() => setActiveDetail(null)}
+        onConsultSimilar={(topic) => onOpenContact?.(topic)}
+      />
     </section>
   );
 }
