@@ -30,31 +30,30 @@
     "updatedAt": "2026-11-21T18:59:30.503Z"
   },
   {
-    "id": "kasnalar-fintech",
-    "slug": "kasnalar-pembukuan-umkm",
-    "name": "KasNalar — Pembukuan & Arus Kas UMKM",
-    "clientName": "Koperasi Tumbuh Malang",
+    "id": "moneflo-finance",
+    "slug": "moneflo-keuangan-organisasi",
+    "name": "MoneFlo — Manajemen Keuangan Organisasi",
+    "clientName": "MoneFlo",
     "categoryId": "keuangan",
     "categoryLabel": "Keuangan & Fintech",
-    "summary": "Aplikasi pencatatan transaksi harian, laporan laba-rugi otomatis, dan pengingat tagihan piutang berbasis data untuk UMKM kuliner dan ritel.",
+    "summary": "Platform manajemen keuangan berbasis web untuk organisasi, komunitas, dan kepanitiaan. Mendigitalisasi pencatatan pemasukan, pengeluaran, serta pemantauan saldo terklasifikasi secara terpusat agar pengelolaan kas lebih rapi, efisien, transparan, akuntabel, dan minim human error.",
     "platforms": [
-      "android",
       "web"
     ],
     "techStack": [
-      "Kotlin",
-      "Jetpack Compose",
-      "Next.js",
-      "PostgreSQL"
+      "React.js",
+      "Laravel"
     ],
     "year": 2026,
     "featured": true,
+    "imageAssetPath": "/assets/portfolio/moneflo.png",
+    "demoUrl": "https://moneflo.pages.dev",
     "accent": "#3A4EFB",
     "secondaryAccent": "#252943",
     "surfaceTint": "#33A4FA",
     "mockupKind": "finance",
     "createdAt": "2026-02-10T08:00:00.000Z",
-    "updatedAt": "2026-02-10T08:00:00.000Z"
+    "updatedAt": "2026-11-22T04:30:00.000Z"
   },
   {
     "id": "jasarapi-pro",

@@ -83,7 +83,7 @@ export function PortfolioMockup({ item }: { item: PortfolioItem }) {
                   <span className="rounded bg-[#E3FF3B] px-1.5 py-0.5 text-[7px] font-extrabold text-[#252943]">
                     CASHFLOW +28%
                   </span>
-                  <span className="text-[7px] text-[#DEE0ED]">KasNalar</span>
+                  <span className="text-[7px] text-[#DEE0ED]">MoneFlo</span>
                 </div>
                 <div className="rounded bg-gradient-to-r from-[#3A4EFB] to-[#33A4FA] p-1.5">
                   <div className="text-[6.5px] opacity-85">Saldo Bersih Bulan Ini</div>
