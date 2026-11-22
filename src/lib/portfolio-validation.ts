@@ -202,6 +202,15 @@ export function validatePortfolioInput(
       "Path gambar asset tidak valid atau tidak diizinkan.";
   }
 
+  const clientLogoPath =
+    typeof record.clientLogoPath === "string"
+      ? record.clientLogoPath.trim()
+      : "";
+  if (clientLogoPath && !isSafeImageAssetPath(clientLogoPath)) {
+    errors.clientLogoPath =
+      "Path logo klien tidak valid atau tidak diizinkan.";
+  }
+
   const accent =
     typeof record.accent === "string" ? record.accent.trim() : undefined;
   if (accent && !HEX_COLOR_PATTERN.test(accent)) {
@@ -246,6 +255,7 @@ export function validatePortfolioInput(
       year: yearNum,
       featured: Boolean(record.featured),
       imageAssetPath: imageAssetPath || undefined,
+      clientLogoPath: clientLogoPath || undefined,
       demoUrl: demoUrl || undefined,
       accent,
       secondaryAccent,

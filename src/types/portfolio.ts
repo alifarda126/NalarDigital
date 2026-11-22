@@ -37,6 +37,8 @@ export interface PortfolioItem {
   featured?: boolean;
   /** Path asset gambar (/assets/portfolio/... atau /images/...) atau data URL untuk fallback browser. */
   imageAssetPath?: string;
+  /** Path logo klien opsional agar tampilan kartu dapat menampilkan emblem klien. */
+  clientLogoPath?: string;
   demoUrl?: string;
   accent: string;
   secondaryAccent: string;
@@ -57,6 +59,7 @@ export interface PortfolioInput {
   year: number;
   featured?: boolean;
   imageAssetPath?: string;
+  clientLogoPath?: string;
   demoUrl?: string;
   accent?: string;
   secondaryAccent?: string;

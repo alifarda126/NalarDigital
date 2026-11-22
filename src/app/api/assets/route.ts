@@ -1,11 +1,19 @@
 import { NextResponse } from "next/server";
 import { validateImageUpload } from "@/lib/portfolio-validation";
+import { getAuthenticatedAdmin } from "@/lib/server/admin-auth";
 import {
   deletePortfolioAssetFromDisk,
   isLocalWriteEnabled,
   listDiskAssets,
   savePortfolioAssetToDisk,
 } from "@/lib/server/local-cms";
+
+function unauthorizedResponse() {
+  return NextResponse.json(
+    { error: "Akses ditolak. Login Superadmin diperlukan." },
+    { status: 401 }
+  );
+}
 
 function readOnlyResponse() {
   return NextResponse.json(
@@ -19,6 +27,11 @@ function readOnlyResponse() {
 }
 
 export async function GET() {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) {
+    return unauthorizedResponse();
+  }
+
   const assets = await listDiskAssets();
   return NextResponse.json({
     assets,
@@ -27,6 +40,11 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) {
+    return unauthorizedResponse();
+  }
+
   if (!isLocalWriteEnabled()) {
     return readOnlyResponse();
   }
@@ -89,6 +107,11 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE(request: Request) {
+  const admin = await getAuthenticatedAdmin();
+  if (!admin) {
+    return unauthorizedResponse();
+  }
+
   if (!isLocalWriteEnabled()) {
     return readOnlyResponse();
   }

@@ -25,6 +25,7 @@ describe("validatePortfolioInput", () => {
       year: 2026,
       demoUrl: "https://demo.nalardigital.id/dompetnalar",
       imageAssetPath: "/assets/portfolio/dompet-nalar.png",
+      clientLogoPath: "/images/brand/logo-nd-transparent.png",
     });
 
     assert.equal(result.ok, true);
@@ -32,6 +33,10 @@ describe("validatePortfolioInput", () => {
       assert.deepEqual(result.data.techStack, ["Kotlin", "Flutter", "Next.js"]);
       assert.deepEqual(result.data.platforms, ["android", "web"]);
       assert.equal(result.data.categoryId, "keuangan");
+      assert.equal(
+        result.data.clientLogoPath,
+        "/images/brand/logo-nd-transparent.png"
+      );
     }
   });
 

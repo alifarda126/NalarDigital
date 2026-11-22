@@ -1,35 +1,19 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { SERVICES } from "@/data/homepage";
 import { BrandLogo } from "./BrandLogo";
 
 interface FooterProps {
-  onSelectService?: (index: number) => void;
-  onOpenContact?: (topic?: string) => void;
+  onSelectService: (index: number) => void;
+  onOpenContact: (topic?: string) => void;
 }
 
 export function Footer({ onSelectService, onOpenContact }: FooterProps) {
-  const router = useRouter();
-
   const handleServiceClick = (index: number) => {
-    if (onSelectService) {
-      onSelectService(index);
-      const el = document.getElementById("services");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-        return;
-      }
-    }
-    router.push("/#services");
-  };
-
-  const handleContactClick = () => {
-    if (onOpenContact) {
-      onOpenContact("Discovery & Mini-Audit Gratis");
-    } else {
-      router.push("/#contact-cta");
+    onSelectService(index);
+    const el = document.getElementById("services");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -57,9 +41,9 @@ export function Footer({ onSelectService, onOpenContact }: FooterProps) {
         {/* Band 1: Official ND Logo + Brand mission statement + Remote-First Malang & contact */}
         <div className="grid grid-cols-1 gap-8 border-b border-white/15 pb-10 min-[769px]:grid-cols-12 min-[769px]:items-start">
           <div className="min-[769px]:col-span-7">
-            <Link href="/" aria-label="Nalar Digital Beranda" className="inline-flex">
+            <a href="#home" aria-label="Nalar Digital Beranda" className="inline-flex">
               <BrandLogo variant="dark" size="lg" />
-            </Link>
+            </a>
             <p className="mt-4 max-w-xl font-heading text-base leading-relaxed font-semibold text-white/95 min-[1025px]:text-[19px]">
               Nalar Digital hadir sebagai mitra pertumbuhan digital berbasis Insight-Driven Decision Making bagi UMKM dan perusahaan B2B.
             </p>
@@ -92,29 +76,26 @@ export function Footer({ onSelectService, onOpenContact }: FooterProps) {
           </div>
         </div>
 
-        {/* Band 2: Primary links */}
+        {/* Band 2: Primary public links */}
         <nav
           aria-label="Footer navigation"
           className="grid grid-cols-2 gap-y-4 gap-x-6 border-b border-white/15 py-7 font-heading text-sm font-medium text-white min-[769px]:flex min-[769px]:items-center min-[769px]:justify-between"
         >
-          <Link href="/#home" className="transition-colors hover:text-brand-lime">
+          <a href="#home" className="transition-colors hover:text-brand-lime">
             Home
-          </Link>
-          <Link href="/#services" className="transition-colors hover:text-brand-lime">
+          </a>
+          <a href="#services" className="transition-colors hover:text-brand-lime">
             Layanan
-          </Link>
-          <Link href="/#portfolio" className="transition-colors hover:text-brand-lime">
+          </a>
+          <a href="#portfolio" className="transition-colors hover:text-brand-lime">
             Portofolio
-          </Link>
-          <Link href="/assets" className="transition-colors hover:text-brand-lime">
-            Asset &amp; Studio
-          </Link>
-          <Link href="/#pricing" className="transition-colors hover:text-brand-lime">
+          </a>
+          <a href="#pricing" className="transition-colors hover:text-brand-lime">
             Paket
-          </Link>
+          </a>
           <button
             type="button"
-            onClick={handleContactClick}
+            onClick={() => onOpenContact("Discovery & Mini-Audit Gratis")}
             className="text-left transition-colors hover:text-brand-lime cursor-pointer"
           >
             Kontak

@@ -1,5 +1,35 @@
 [
   {
+    "id": "josjis-mwqrv70n",
+    "slug": "josjis",
+    "name": "Josjis",
+    "clientName": "D Studio Photo",
+    "categoryId": "jasa",
+    "categoryLabel": "Jasa Profesional",
+    "summary": "berdampak.",
+    "platforms": [
+      "android",
+      "uiux",
+      "web",
+      "ios"
+    ],
+    "techStack": [
+      "Kotlin",
+      "Flutter",
+      "React Native",
+      "Prototyping"
+    ],
+    "year": 2026,
+    "featured": false,
+    "imageAssetPath": "/assets/portfolio/poster-web-d-studio-2-1795287552333.png",
+    "accent": "#33A4FA",
+    "secondaryAccent": "#1B1E35",
+    "surfaceTint": "#3A4EFB",
+    "mockupKind": "service",
+    "createdAt": "2026-11-21T18:59:30.503Z",
+    "updatedAt": "2026-11-21T18:59:30.503Z"
+  },
+  {
     "id": "kasnalar-fintech",
     "slug": "kasnalar-pembukuan-umkm",
     "name": "KasNalar — Pembukuan & Arus Kas UMKM",
@@ -131,59 +161,6 @@
     "mockupKind": "property",
     "createdAt": "2025-10-20T08:00:00.000Z",
     "updatedAt": "2025-10-20T08:00:00.000Z"
-  },
-  {
-    "id": "kelasnalar-lms",
-    "slug": "kelasnalar-lms-edukasi",
-    "name": "KelasNalar — LMS & Progress Tracker",
-    "clientName": "Lembaga Kursus Cendekia",
-    "categoryId": "pendidikan",
-    "categoryLabel": "Pendidikan & LMS",
-    "summary": "Platform kelas hybrid dengan materi video terstruktur, latihan soal otomatis, sertifikat digital, dan dashboard pemantauan belajar untuk orang tua.",
-    "platforms": [
-      "web",
-      "android"
-    ],
-    "techStack": [
-      "Next.js",
-      "Flutter",
-      "Python"
-    ],
-    "year": 2026,
-    "featured": false,
-    "accent": "#33A4FA",
-    "secondaryAccent": "#252943",
-    "surfaceTint": "#3A4EFB",
-    "mockupKind": "education",
-    "createdAt": "2026-04-02T08:00:00.000Z",
-    "updatedAt": "2026-04-02T08:00:00.000Z"
-  },
-  {
-    "id": "batikloka-store",
-    "slug": "batikloka-ecommerce-umkm",
-    "name": "BatikLoka — Katalog & Checkout UMKM",
-    "clientName": "Sentra Batik Loka Jatim",
-    "categoryId": "ecommerce",
-    "categoryLabel": "E-Commerce UMKM",
-    "summary": "Toko online responsif dengan variasi ukuran otomatis, estimasi ongkir instan, dan integrasi pembayaran QRIS untuk perajin batik lokal.",
-    "platforms": [
-      "android",
-      "ios",
-      "web"
-    ],
-    "techStack": [
-      "Flutter",
-      "Next.js",
-      "TypeScript"
-    ],
-    "year": 2025,
-    "featured": false,
-    "accent": "#3A4EFB",
-    "secondaryAccent": "#252943",
-    "surfaceTint": "#4F6BFF",
-    "mockupKind": "ecommerce",
-    "createdAt": "2025-09-14T08:00:00.000Z",
-    "updatedAt": "2025-09-14T08:00:00.000Z"
   },
   {
     "id": "trackops-b2b",

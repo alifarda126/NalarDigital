@@ -30,6 +30,11 @@ interface MutationResult<T = void> {
   data?: T;
   error?: string;
   errors?: Record<string, string>;
+  unauthorized?: boolean;
+}
+
+interface UsePortfolioStoreOptions {
+  includeAssets?: boolean;
 }
 
 const MAX_BROWSER_ASSET_BYTES = 1_500_000; // 1.5 MB safeguard for localStorage quota
@@ -49,7 +54,8 @@ function fileToDataUrl(file: File): Promise<string> {
   });
 }
 
-export function usePortfolioStore() {
+export function usePortfolioStore(options: UsePortfolioStoreOptions = {}) {
+  const { includeAssets = false } = options;
   const [portfolios, setPortfolios] = useState<PortfolioItem[]>(DEFAULT_PORTFOLIOS);
   const [assets, setAssets] = useState<AssetItem[]>([]);
   const [storageMode, setStorageMode] = useState<StorageMode>("local-file");
@@ -58,10 +64,10 @@ export function usePortfolioStore() {
 
   const loadAll = useCallback(async () => {
     try {
-      const [portfolioRes, assetsRes] = await Promise.all([
-        fetch("/api/portfolios", { cache: "no-store" }),
-        fetch("/api/assets", { cache: "no-store" }),
-      ]);
+      const portfolioRes = await fetch("/api/portfolios", { cache: "no-store" });
+      const assetsRes = includeAssets
+        ? await fetch("/api/assets", { cache: "no-store" })
+        : null;
 
       let serverWritable = false;
       let serverPortfolios: PortfolioItem[] = DEFAULT_PORTFOLIOS;
@@ -78,7 +84,7 @@ export function usePortfolioStore() {
         serverWritable = Boolean(json.writable);
       }
 
-      if (assetsRes.ok) {
+      if (assetsRes && assetsRes.ok) {
         const json = (await assetsRes.json()) as {
           assets?: AssetItem[];
           writable?: boolean;
@@ -95,23 +101,31 @@ export function usePortfolioStore() {
 
       if (mode === "local-file") {
         setPortfolios(serverPortfolios);
-        setAssets(diskAssets);
+        if (includeAssets) {
+          setAssets(diskAssets);
+        }
       } else {
         const storedPortfolios = readBrowserPortfolios();
         setPortfolios(storedPortfolios ?? serverPortfolios);
-        const browserAssets = readBrowserAssets();
-        setAssets([...browserAssets, ...diskAssets]);
+        if (includeAssets) {
+          const browserAssets = readBrowserAssets();
+          setAssets([...browserAssets, ...diskAssets]);
+        }
       }
     } catch {
-      setErrorMessage("Tidak dapat terhubung ke API lokal, beralih ke penyimpanan browser.");
+      setErrorMessage(
+        "Tidak dapat terhubung ke API lokal, menggunakan penyimpanan browser."
+      );
       setStorageMode("browser-storage");
       const storedPortfolios = readBrowserPortfolios();
       setPortfolios(storedPortfolios ?? DEFAULT_PORTFOLIOS);
-      setAssets(readBrowserAssets());
+      if (includeAssets) {
+        setAssets(readBrowserAssets());
+      }
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [includeAssets]);
 
   useEffect(() => {
     let active = true;
@@ -155,6 +169,14 @@ export function usePortfolioStore() {
             body: JSON.stringify(validated.data),
           });
 
+          if (res.status === 401) {
+            return {
+              ok: false,
+              unauthorized: true,
+              error: "Sesi Superadmin telah berakhir. Silakan login kembali.",
+            };
+          }
+
           if (res.status === 501) {
             setStorageMode("browser-storage");
           } else {
@@ -184,7 +206,6 @@ export function usePortfolioStore() {
         }
       }
 
-      // Browser storage fallback
       const existingTarget = isEdit
         ? portfolios.find((p) => p.id === validated.data.id)
         : undefined;
@@ -217,6 +238,15 @@ export function usePortfolioStore() {
             `/api/portfolios?id=${encodeURIComponent(id)}`,
             { method: "DELETE" }
           );
+
+          if (res.status === 401) {
+            return {
+              ok: false,
+              unauthorized: true,
+              error: "Sesi Superadmin telah berakhir. Silakan login kembali.",
+            };
+          }
+
           if (res.status === 501) {
             setStorageMode("browser-storage");
           } else {
@@ -276,6 +306,14 @@ export function usePortfolioStore() {
             body: formData,
           });
 
+          if (res.status === 401) {
+            return {
+              ok: false,
+              unauthorized: true,
+              error: "Sesi Superadmin telah berakhir. Silakan login kembali.",
+            };
+          }
+
           if (res.status === 501) {
             setStorageMode("browser-storage");
           } else {
@@ -329,7 +367,8 @@ export function usePortfolioStore() {
         if (!persisted) {
           return {
             ok: false,
-            error: "Kuota penyimpanan browser penuh. Hapus beberapa asset lama terlebih dahulu.",
+            error:
+              "Kuota penyimpanan browser penuh. Hapus beberapa asset lama terlebih dahulu.",
           };
         }
         setAssets((prev) => [newAsset, ...prev]);
@@ -353,7 +392,7 @@ export function usePortfolioStore() {
       if (!asset.isCustom) {
         return {
           ok: false,
-          error: "Asset inti brand/website tidak dapat dihapus dari studio.",
+          error: "Asset inti brand/website tidak dapat dihapus dari CMS.",
         };
       }
 
@@ -363,6 +402,15 @@ export function usePortfolioStore() {
             `/api/assets?name=${encodeURIComponent(asset.name)}`,
             { method: "DELETE" }
           );
+
+          if (res.status === 401) {
+            return {
+              ok: false,
+              unauthorized: true,
+              error: "Sesi Superadmin telah berakhir. Silakan login kembali.",
+            };
+          }
+
           const payload = (await res.json()) as {
             assets?: AssetItem[];
             error?: string;
@@ -379,7 +427,10 @@ export function usePortfolioStore() {
           notifyPortfolioSync();
           return { ok: true };
         } catch {
-          return { ok: false, error: "Gagal terhubung ke server untuk menghapus asset." };
+          return {
+            ok: false,
+            error: "Gagal terhubung ke server untuk menghapus asset.",
+          };
         }
       }
 
@@ -418,7 +469,6 @@ export function usePortfolioStore() {
       }
 
       if (storageMode === "local-file") {
-        // Persist imported items cleanly one-by-one or replace browser fallback
         let importedCount = 0;
         for (const item of parsed) {
           const res = await fetch("/api/portfolios", {
@@ -434,12 +484,20 @@ export function usePortfolioStore() {
               year: item.year,
               featured: item.featured,
               imageAssetPath: item.imageAssetPath,
+              clientLogoPath: item.clientLogoPath,
               demoUrl: item.demoUrl,
               accent: item.accent,
               secondaryAccent: item.secondaryAccent,
               surfaceTint: item.surfaceTint,
             }),
           });
+          if (res.status === 401) {
+            return {
+              ok: false,
+              unauthorized: true,
+              error: "Sesi Superadmin telah berakhir. Silakan login kembali.",
+            };
+          }
           if (res.ok) importedCount += 1;
         }
         await loadAll();

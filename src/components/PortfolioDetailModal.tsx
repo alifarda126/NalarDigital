@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect } from "react";
-import { ArrowUpRight, Code2, ExternalLink, Layers, Sparkles, X } from "lucide-react";
+import { Code2, ExternalLink, Layers, Sparkles, X } from "lucide-react";
 import type { PortfolioItem } from "@/types/portfolio";
 import { PlatformIcon } from "./PlatformIcon";
 import { PortfolioMockup } from "./PortfolioMockup";
@@ -65,7 +64,7 @@ export function PortfolioDetailModal({
               {item.categoryLabel}
             </span>
             <span className="rounded-full bg-brand-soft px-3 py-1 font-heading text-[11px] font-semibold text-brand-navy">
-              {item.clientName}
+              {item.clientName} • {item.year}
             </span>
           </div>
 
@@ -115,41 +114,30 @@ export function PortfolioDetailModal({
           </div>
         </div>
 
-        <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-2.5">
-            <button
-              type="button"
-              onClick={() => {
-                onClose();
-                onConsultSimilar(`Proyek Serupa: ${item.name} (${item.categoryLabel})`);
-              }}
-              className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-brand-gradient px-5 py-2.5 font-heading text-sm font-semibold text-white shadow-[0_10px_24px_rgba(58,78,251,0.28)] transition-all hover:-translate-y-0.5 cursor-pointer"
-            >
-              <Sparkles className="h-4 w-4" />
-              Buat Proyek Serupa
-            </button>
-
-            {item.demoUrl && (
-              <a
-                href={item.demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-[42px] items-center gap-1.5 rounded-xl border border-brand-muted bg-white px-4 py-2.5 font-heading text-sm font-semibold text-brand-navy transition-colors hover:border-brand-primary hover:text-brand-primary"
-              >
-                Lihat Demo
-                <ExternalLink className="h-4 w-4" />
-              </a>
-            )}
-          </div>
-
-          <Link
-            href="/assets"
-            onClick={onClose}
-            className="inline-flex items-center gap-1 font-heading text-xs font-bold text-brand-primary hover:underline"
+        <div className="mt-6 flex flex-wrap items-center gap-2.5">
+          <button
+            type="button"
+            onClick={() => {
+              onClose();
+              onConsultSimilar(`Proyek Serupa: ${item.name} (${item.categoryLabel})`);
+            }}
+            className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-brand-gradient px-5 py-2.5 font-heading text-sm font-semibold text-white shadow-[0_10px_24px_rgba(58,78,251,0.28)] transition-all hover:-translate-y-0.5 cursor-pointer"
           >
-            Edit di Studio Asset
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </Link>
+            <Sparkles className="h-4 w-4" />
+            Buat Proyek Serupa
+          </button>
+
+          {item.demoUrl && (
+            <a
+              href={item.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[42px] items-center gap-1.5 rounded-xl border border-brand-muted bg-white px-4 py-2.5 font-heading text-sm font-semibold text-brand-navy transition-colors hover:border-brand-primary hover:text-brand-primary"
+            >
+              Lihat Demo
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          )}
         </div>
       </div>
     </div>

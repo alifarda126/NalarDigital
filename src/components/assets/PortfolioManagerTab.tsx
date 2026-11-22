@@ -75,6 +75,7 @@ interface FormState {
   year: number;
   featured: boolean;
   imageAssetPath: string;
+  clientLogoPath: string;
   demoUrl: string;
 }
 
@@ -89,6 +90,7 @@ function createInitialForm(preselectedAssetUrl?: string | null): FormState {
     year: new Date().getFullYear(),
     featured: false,
     imageAssetPath: preselectedAssetUrl ?? "",
+    clientLogoPath: "",
     demoUrl: "",
   };
 }
@@ -162,6 +164,7 @@ export function PortfolioManagerTab({
       year: form.year,
       featured: form.featured,
       imageAssetPath: form.imageAssetPath || undefined,
+      clientLogoPath: form.clientLogoPath || undefined,
       demoUrl: form.demoUrl || undefined,
       accent: cat.accent,
       secondaryAccent: cat.secondaryAccent,
@@ -266,6 +269,7 @@ export function PortfolioManagerTab({
       year: item.year,
       featured: Boolean(item.featured),
       imageAssetPath: item.imageAssetPath ?? "",
+      clientLogoPath: item.clientLogoPath ?? "",
       demoUrl: item.demoUrl ?? "",
     });
     setFieldErrors({});
@@ -291,6 +295,7 @@ export function PortfolioManagerTab({
       year: Number(form.year),
       featured: form.featured,
       imageAssetPath: form.imageAssetPath || undefined,
+      clientLogoPath: form.clientLogoPath || undefined,
       demoUrl: form.demoUrl || undefined,
     };
 
@@ -731,6 +736,61 @@ export function PortfolioManagerTab({
               )}
             </div>
 
+            {/* Row 6b: Optional Client Logo selector */}
+            <div className="rounded-2xl border border-brand-muted/80 bg-brand-canvas p-4">
+              <span className="font-heading text-xs font-bold uppercase tracking-wide text-brand-navy">
+                Logo Klien pada Kartu (Opsional)
+              </span>
+              <p className="mt-1 text-[11px] text-[#525775]">
+                Pilih logo klien dari pustaka asset agar tampil di atas judul kartu, atau gunakan badge inisial otomatis.
+              </p>
+              <div className="mt-2.5 flex flex-wrap items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setForm((prev) => ({ ...prev, clientLogoPath: "" }))
+                  }
+                  className={`rounded-xl border px-3 py-1.5 font-heading text-xs font-semibold transition-all cursor-pointer ${
+                    form.clientLogoPath === ""
+                      ? "border-brand-primary bg-brand-primary text-white"
+                      : "border-brand-muted bg-white text-brand-navy hover:border-brand-sky"
+                  }`}
+                >
+                  Badge Inisial Otomatis
+                </button>
+                {assets.map((asset) => {
+                  const selected = form.clientLogoPath === asset.url;
+                  return (
+                    <button
+                      key={`logo-${asset.id}`}
+                      type="button"
+                      onClick={() =>
+                        setForm((prev) => ({
+                          ...prev,
+                          clientLogoPath: asset.url,
+                        }))
+                      }
+                      className={`flex items-center gap-2 rounded-xl border p-1.5 pr-3 text-left transition-all cursor-pointer ${
+                        selected
+                          ? "border-brand-primary bg-brand-soft ring-2 ring-brand-primary/30"
+                          : "border-brand-muted bg-white hover:border-brand-sky"
+                      }`}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={asset.url}
+                        alt={asset.name}
+                        className="h-6 w-8 rounded object-contain bg-brand-canvas"
+                      />
+                      <span className="max-w-[110px] truncate font-heading text-[11px] font-semibold text-brand-navy">
+                        {asset.name}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Row 7: Optional Demo URL */}
             <div>
               <label
@@ -790,25 +850,47 @@ export function PortfolioManagerTab({
             <div className="mt-4 group rounded-2xl border border-brand-muted/80 bg-white p-4 shadow-[0_10px_28px_rgba(37,41,67,0.06)]">
               <PortfolioMockup item={previewItem} />
               <div className="px-1 pt-4 pb-1">
-                <div className="flex flex-wrap items-center justify-between gap-2">
-                  <span className="rounded-full bg-brand-soft px-2.5 py-0.5 font-heading text-[11px] font-bold text-brand-primary">
-                    {previewItem.categoryLabel}
+                {previewItem.clientLogoPath ? (
+                  <div className="flex h-7 items-center">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={previewItem.clientLogoPath}
+                      alt={previewItem.clientName}
+                      className="h-6 max-w-[120px] object-contain"
+                    />
+                  </div>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5">
+                    <span
+                      className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md font-heading text-[10px] font-extrabold text-white"
+                      style={{
+                        backgroundColor:
+                          previewItem.accent === "#E3FF3B"
+                            ? "#252943"
+                            : previewItem.accent,
+                      }}
+                    >
+                      {previewItem.clientName.slice(0, 1).toUpperCase()}
+                    </span>
+                    <span className="font-heading text-xs font-bold text-brand-primary">
+                      {previewItem.clientName}
+                    </span>
                   </span>
-                  <div className="inline-flex items-center gap-1">
+                )}
+                <h4 className="mt-2 font-heading text-lg font-bold text-brand-navy line-clamp-1">
+                  {previewItem.name}
+                </h4>
+                <div className="mt-2 flex flex-wrap items-center gap-2 text-[13px] font-medium text-[#525775]">
+                  <span>{previewItem.categoryLabel}</span>
+                  <span aria-hidden="true" className="text-[#9BA1BC]">
+                    •
+                  </span>
+                  <div className="inline-flex items-center gap-1.5">
                     {previewItem.platforms.map((platform) => (
                       <PlatformIcon key={platform} platform={platform} />
                     ))}
                   </div>
                 </div>
-                <h4 className="mt-2.5 font-heading text-base font-bold text-brand-navy">
-                  {previewItem.name}
-                </h4>
-                <p className="mt-0.5 text-xs font-semibold text-[#525775]">
-                  {previewItem.clientName}
-                </p>
-                <p className="mt-2 text-xs leading-relaxed text-[#525775] line-clamp-2">
-                  {previewItem.summary}
-                </p>
                 <div className="mt-3 flex flex-wrap items-center gap-1.5 border-t border-brand-muted/60 pt-3">
                   <Code2 className="h-3.5 w-3.5 text-brand-sky" />
                   {previewItem.techStack.map((tech) => (

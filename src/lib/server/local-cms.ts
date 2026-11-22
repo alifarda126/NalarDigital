@@ -85,6 +85,7 @@ export function buildPortfolioItem(
     year: input.year,
     featured: input.featured ?? false,
     imageAssetPath: input.imageAssetPath,
+    clientLogoPath: input.clientLogoPath,
     demoUrl: input.demoUrl,
     accent: input.accent ?? category.accent,
     secondaryAccent: input.secondaryAccent ?? category.secondaryAccent,

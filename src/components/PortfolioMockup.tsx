@@ -68,9 +68,6 @@ export function PortfolioMockup({ item }: { item: PortfolioItem }) {
           onError={() => setImageBroken(true)}
           className="h-full w-full object-cover transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
         />
-        <span className="absolute top-2.5 left-2.5 rounded-full bg-brand-navy/85 px-2.5 py-0.5 font-heading text-[10px] font-bold tracking-wide text-brand-lime backdrop-blur-xs">
-          {item.year}
-        </span>
       </div>
     );
   }
@@ -344,9 +341,6 @@ export function PortfolioMockup({ item }: { item: PortfolioItem }) {
         className="pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full opacity-30"
         style={{ backgroundColor: item.accent }}
       />
-      <span className="absolute top-2.5 left-2.5 z-20 rounded-full bg-brand-navy/80 px-2.5 py-0.5 font-heading text-[10px] font-bold tracking-wide text-brand-lime backdrop-blur-xs">
-        {item.year}
-      </span>
       <div className="relative z-10 w-full transition-transform duration-300 group-hover:-translate-y-1">
         {renderScene()}
       </div>
