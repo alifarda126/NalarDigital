@@ -56,6 +56,35 @@
     "updatedAt": "2026-11-22T04:30:00.000Z"
   },
   {
+    "id": "dinoyocraft-ecommerce",
+    "slug": "dinoyocraft-ecommerce-keramik",
+    "name": "DinoyoCraft — E-Commerce & Workshop Keramik",
+    "clientName": "Sentra Keramik Dinoyo, Malang",
+    "categoryId": "ecommerce",
+    "categoryLabel": "E-Commerce UMKM",
+    "summary": "Platform e-commerce dan workshop keramik yang berpusat di Kampung Keramik Dinoyo, Kota Malang. Pengunjung dapat berbelanja langsung melalui aplikasi mobile, sementara pengelolaan toko mitra pengrajin dan super admin terintegrasi melalui dashboard website.",
+    "platforms": [
+      "android",
+      "ios",
+      "web"
+    ],
+    "techStack": [
+      "Flutter",
+      "Next.js",
+      "Express.js"
+    ],
+    "year": 2026,
+    "featured": true,
+    "imageAssetPath": "/assets/portfolio/dinoyocraft.png",
+    "demoUrl": "https://dinoyocraft.my.id",
+    "accent": "#3A4EFB",
+    "secondaryAccent": "#252943",
+    "surfaceTint": "#4F6BFF",
+    "mockupKind": "ecommerce",
+    "createdAt": "2026-11-24T11:48:00.000Z",
+    "updatedAt": "2026-11-24T11:48:00.000Z"
+  },
+  {
     "id": "jasarapi-pro",
     "slug": "jasarapi-pro-booking",
     "name": "JasaRapi Pro — Booking Teknisi & Jasa",

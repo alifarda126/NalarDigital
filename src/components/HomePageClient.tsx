@@ -1,7 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { ContactModal } from "./ContactModal";
+import {
+  buildConsultationWhatsAppMessage,
+  openWhatsAppChat,
+} from "@/lib/whatsapp";
 import { CtaSection } from "./CtaSection";
 import { Footer } from "./Footer";
 import { HappyClientsSection } from "./HappyClientsSection";
@@ -16,12 +19,9 @@ import { WhatsAppWidget } from "./WhatsAppWidget";
 
 export function HomePageClient() {
   const [activeServiceIndex, setActiveServiceIndex] = useState(0);
-  const [contactOpen, setContactOpen] = useState(false);
-  const [contactTopic, setContactTopic] = useState("Discovery & Mini-Audit Gratis");
 
   const handleOpenContact = (topic = "Discovery & Mini-Audit Gratis") => {
-    setContactTopic(topic);
-    setContactOpen(true);
+    openWhatsAppChat(buildConsultationWhatsAppMessage(topic));
   };
 
   return (
@@ -46,8 +46,8 @@ export function HomePageClient() {
           onDiscoverMore={handleOpenContact}
         />
 
-        {/* 5. Portofolio Interaktif (Filter Bidang, Platform, Bahasa & Asset) */}
-        <PortfolioSection onOpenContact={handleOpenContact} />
+        {/* 5. Portofolio Showcase (dikelola manual via src/data/portfolios.json) */}
+        <PortfolioSection />
 
         {/* 6. Statistik & Keunggulan Nalar Digital */}
         <StatsSection />
@@ -69,12 +69,6 @@ export function HomePageClient() {
       <Footer
         onSelectService={setActiveServiceIndex}
         onOpenContact={handleOpenContact}
-      />
-
-      <ContactModal
-        open={contactOpen}
-        initialTopic={contactTopic}
-        onClose={() => setContactOpen(false)}
       />
     </div>
   );

@@ -2,6 +2,10 @@
 
 import { useEffect } from "react";
 import { Code2, ExternalLink, Layers, Sparkles, X } from "lucide-react";
+import {
+  buildPortfolioWhatsAppMessage,
+  buildWhatsAppUrl,
+} from "@/lib/whatsapp";
 import type { PortfolioItem } from "@/types/portfolio";
 import { PlatformIcon } from "./PlatformIcon";
 import { PortfolioMockup } from "./PortfolioMockup";
@@ -9,13 +13,11 @@ import { PortfolioMockup } from "./PortfolioMockup";
 interface PortfolioDetailModalProps {
   item: PortfolioItem | null;
   onClose: () => void;
-  onConsultSimilar: (topic: string) => void;
 }
 
 export function PortfolioDetailModal({
   item,
   onClose,
-  onConsultSimilar,
 }: PortfolioDetailModalProps) {
   useEffect(() => {
     if (!item) return;
@@ -115,17 +117,16 @@ export function PortfolioDetailModal({
         </div>
 
         <div className="mt-6 flex flex-wrap items-center gap-2.5">
-          <button
-            type="button"
-            onClick={() => {
-              onClose();
-              onConsultSimilar(`Proyek Serupa: ${item.name} (${item.categoryLabel})`);
-            }}
+          <a
+            href={buildWhatsAppUrl(buildPortfolioWhatsAppMessage(item.name))}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
             className="inline-flex min-h-[42px] items-center gap-2 rounded-xl bg-brand-gradient px-5 py-2.5 font-heading text-sm font-semibold text-white shadow-[0_10px_24px_rgba(58,78,251,0.28)] transition-all hover:-translate-y-0.5 cursor-pointer"
           >
             <Sparkles className="h-4 w-4" />
-            Buat Proyek Serupa
-          </button>
+            Buat Proyek Serupa via WhatsApp
+          </a>
 
           {item.demoUrl && (
             <a

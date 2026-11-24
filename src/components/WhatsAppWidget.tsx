@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Check, Send, X } from "lucide-react";
 import { WHATSAPP_OPTIONS } from "@/data/homepage";
+import {
+  buildConsultationWhatsAppMessage,
+  buildWhatsAppUrl,
+} from "@/lib/whatsapp";
 
 function WhatsAppIcon() {
   return (
@@ -20,11 +24,13 @@ function WhatsAppIcon() {
 export function WhatsAppWidget() {
   const [open, setOpen] = useState(false);
   const [selectedId, setSelectedId] = useState(WHATSAPP_OPTIONS[0].id);
-  const [started, setStarted] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
   const selectedOption =
     WHATSAPP_OPTIONS.find((opt) => opt.id === selectedId) ?? WHATSAPP_OPTIONS[0];
+  const whatsappUrl = buildWhatsAppUrl(
+    buildConsultationWhatsAppMessage(selectedOption.label)
+  );
 
   useEffect(() => {
     if (!open) return;
@@ -50,7 +56,6 @@ export function WhatsAppWidget() {
 
   const handleToggle = () => {
     setOpen((prev) => !prev);
-    setStarted(false);
   };
 
   return (
@@ -89,65 +94,47 @@ export function WhatsAppWidget() {
         </div>
 
         <div className="p-3.5">
-          {started ? (
-            <div className="rounded-xl border border-[#BBF7D0] bg-[#F0FDF4] p-4 text-left">
-              <p className="font-heading text-sm font-bold text-[#166534]">
-                Pesan konsultasi siap dikirim
-              </p>
-              <p className="mt-1.5 text-xs leading-relaxed text-[#15803D]">
-                Topik terpilih:{" "}
-                <span className="font-semibold">{selectedOption.label}</span>
-              </p>
-              <button
-                type="button"
-                tabIndex={open ? 0 : -1}
-                onClick={() => setStarted(false)}
-                className="mt-3 text-xs font-semibold text-[#166534] underline touch-manipulation cursor-pointer"
-              >
-                Pilih topik lain
-              </button>
-            </div>
-          ) : (
-            <div className="space-y-1.5">
-              {WHATSAPP_OPTIONS.map((option) => {
-                const isSelected = option.id === selectedId;
-                return (
-                  <button
-                    key={option.id}
-                    type="button"
-                    tabIndex={open ? 0 : -1}
-                    onClick={() => setSelectedId(option.id)}
-                    className={`flex w-full items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left text-xs transition-colors touch-manipulation cursor-pointer ${
+          <div className="space-y-1.5">
+            {WHATSAPP_OPTIONS.map((option) => {
+              const isSelected = option.id === selectedId;
+              return (
+                <button
+                  key={option.id}
+                  type="button"
+                  tabIndex={open ? 0 : -1}
+                  onClick={() => setSelectedId(option.id)}
+                  className={`flex w-full items-center justify-between gap-2 rounded-xl border px-3 py-2 text-left text-xs transition-colors touch-manipulation cursor-pointer ${
+                    isSelected
+                      ? "border-[#25D366] bg-[#F0FDF4] font-semibold text-brand-navy"
+                      : "border-brand-muted bg-white text-[#454A66] hover:bg-brand-canvas"
+                  }`}
+                >
+                  <span>{option.label}</span>
+                  <span
+                    className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border transition-colors ${
                       isSelected
-                        ? "border-[#25D366] bg-[#F0FDF4] font-semibold text-brand-navy"
-                        : "border-brand-muted bg-white text-[#454A66] hover:bg-brand-canvas"
+                        ? "border-[#25D366] bg-[#25D366] text-white"
+                        : "border-brand-muted"
                     }`}
                   >
-                    <span>{option.label}</span>
-                    <span
-                      className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full border transition-colors ${
-                        isSelected
-                          ? "border-[#25D366] bg-[#25D366] text-white"
-                          : "border-brand-muted"
-                      }`}
-                    >
-                      {isSelected && <Check className="h-2.5 w-2.5" />}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          )}
+                    {isSelected && <Check className="h-2.5 w-2.5" />}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
 
-          <button
-            type="button"
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             tabIndex={open ? 0 : -1}
-            onClick={() => setStarted(true)}
+            onClick={() => setOpen(false)}
             className="mt-3.5 flex min-h-[44px] w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-2.5 font-heading text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#1EBE5D] active:scale-[0.98] touch-manipulation cursor-pointer"
           >
             <Send className="h-4 w-4" />
             Chat dengan kami
-          </button>
+          </a>
         </div>
       </div>
 

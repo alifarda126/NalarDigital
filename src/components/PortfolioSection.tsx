@@ -1,16 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { usePortfolioStore } from "@/hooks/usePortfolioStore";
+import { DEFAULT_PORTFOLIOS } from "@/data/homepage";
 import type { PortfolioItem } from "@/types/portfolio";
 import { OrganicPetalAccent } from "./EditorialIllustrations";
 import { PlatformIcon } from "./PlatformIcon";
 import { PortfolioDetailModal } from "./PortfolioDetailModal";
 import { PortfolioMockup } from "./PortfolioMockup";
-
-interface PortfolioSectionProps {
-  onOpenContact?: (topic?: string) => void;
-}
 
 function ClientMark({ item }: { item: PortfolioItem }) {
   const [logoBroken, setLogoBroken] = useState(false);
@@ -45,11 +41,11 @@ function ClientMark({ item }: { item: PortfolioItem }) {
 }
 
 /**
- * Clean public portfolio showcase grid (no filter/pagination bar, no CMS links).
- * All entries are dynamically managed via the protected Superadmin CMS (/admin).
+ * Clean public portfolio showcase grid.
+ * Entries are maintained manually in src/data/portfolios.json.
  */
-export function PortfolioSection({ onOpenContact }: PortfolioSectionProps) {
-  const { portfolios } = usePortfolioStore({ includeAssets: false });
+export function PortfolioSection() {
+  const portfolios = DEFAULT_PORTFOLIOS;
   const [activeDetail, setActiveDetail] = useState<PortfolioItem | null>(null);
 
   return (
@@ -120,7 +116,6 @@ export function PortfolioSection({ onOpenContact }: PortfolioSectionProps) {
       <PortfolioDetailModal
         item={activeDetail}
         onClose={() => setActiveDetail(null)}
-        onConsultSimilar={(topic) => onOpenContact?.(topic)}
       />
     </section>
   );
