@@ -60,7 +60,7 @@ export function PortfolioMockup({ item }: { item: PortfolioItem }) {
 
   if (hasValidImage && item.imageAssetPath) {
     return (
-      <div className="relative aspect-[16/11] w-full overflow-hidden rounded-xl border border-brand-muted/70 bg-brand-navy">
+      <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-brand-muted/70 bg-brand-navy">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={item.imageAssetPath}
@@ -332,7 +332,7 @@ export function PortfolioMockup({ item }: { item: PortfolioItem }) {
 
   return (
     <div
-      className="relative flex aspect-[16/11] w-full items-center justify-center overflow-hidden rounded-xl p-4"
+      className="relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-xl p-3"
       style={{
         background: `linear-gradient(135deg, ${item.surfaceTint} 0%, ${item.secondaryAccent} 100%)`,
       }}
