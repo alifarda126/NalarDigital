@@ -1,33 +1,28 @@
 [
   {
-    "id": "josjis-mwqrv70n",
-    "slug": "josjis",
-    "name": "Josjis",
-    "clientName": "D Studio Photo",
+    "id": "d-photo-studio",
+    "slug": "d-photo-studio-editing-foto",
+    "name": "D Photo Studio — Jasa Editing Foto, CV & Visa",
+    "clientName": "D Photo Studio",
     "categoryId": "jasa",
     "categoryLabel": "Jasa Profesional",
-    "summary": "berdampak.",
+    "summary": "Website jasa editing foto profesional untuk kebutuhan pas foto KTM, CV, visa, dan dokumen resmi lainnya. Memudahkan pelanggan mengubah foto selfie menjadi foto formal berkualitas tinggi secara cepat dan praktis melalui pemesanan online.",
     "platforms": [
-      "android",
-      "uiux",
-      "web",
-      "ios"
+      "web"
     ],
     "techStack": [
-      "Kotlin",
-      "Flutter",
-      "React Native",
-      "Prototyping"
+      "React",
+      "Laravel"
     ],
     "year": 2026,
-    "featured": false,
+    "featured": true,
     "imageAssetPath": "/assets/portfolio/poster-web-d-studio-2-1795287552333.png",
     "accent": "#33A4FA",
     "secondaryAccent": "#1B1E35",
     "surfaceTint": "#3A4EFB",
     "mockupKind": "service",
     "createdAt": "2026-11-21T18:59:30.503Z",
-    "updatedAt": "2026-11-21T18:59:30.503Z"
+    "updatedAt": "2026-11-25T00:23:00.000Z"
   },
   {
     "id": "moneflo-finance",
@@ -107,6 +102,56 @@
     "mockupKind": "finance",
     "createdAt": "2026-11-24T11:58:00.000Z",
     "updatedAt": "2026-11-24T11:58:00.000Z"
+  },
+  {
+    "id": "breakfree-coffee",
+    "slug": "breakfree-coffee-mobile-order",
+    "name": "BreakFree Coffee — Aplikasi Pemesanan Kopi",
+    "clientName": "BreakFree Coffee, Malang",
+    "categoryId": "fnb",
+    "categoryLabel": "Food & Beverage (F&B)",
+    "summary": "Aplikasi mobile pemesanan khusus untuk BreakFree Coffee Malang. Dilengkapi rekomendasi menu berbasis Barista AI, pemesanan dine-in & pickup, live tracking status racikan pesanan secara real-time, serta sistem cashback dan poin loyalitas pelanggan.",
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "techStack": [
+      "Flutter"
+    ],
+    "year": 2026,
+    "featured": true,
+    "imageAssetPath": "/assets/portfolio/breakfree-coffee.jpg",
+    "accent": "#E3FF3B",
+    "secondaryAccent": "#252943",
+    "surfaceTint": "#3A4EFB",
+    "mockupKind": "fnb",
+    "createdAt": "2026-11-25T00:20:00.000Z",
+    "updatedAt": "2026-11-25T00:20:00.000Z"
+  },
+  {
+    "id": "smartspend-finance",
+    "slug": "smartspend-personal-finance",
+    "name": "SmartSpend — Personal Finance & Budget Planner",
+    "clientName": "SmartSpend",
+    "categoryId": "keuangan",
+    "categoryLabel": "Keuangan & Fintech",
+    "summary": "Aplikasi manajemen keuangan pribadi berbasis Flutter untuk membantu mengatur pemasukan, alokasi anggaran pokok, keinginan, dan tabungan. Dilengkapi profil risiko, Spending Alert real-time agar anti boros, serta Final Analyze dengan skor kesehatan finansial.",
+    "platforms": [
+      "android",
+      "ios"
+    ],
+    "techStack": [
+      "Flutter"
+    ],
+    "year": 2026,
+    "featured": true,
+    "imageAssetPath": "/assets/portfolio/smartspend.jpg",
+    "accent": "#3A4EFB",
+    "secondaryAccent": "#252943",
+    "surfaceTint": "#33A4FA",
+    "mockupKind": "finance",
+    "createdAt": "2026-11-25T00:20:00.000Z",
+    "updatedAt": "2026-11-25T00:20:00.000Z"
   },
   {
     "id": "jasarapi-pro",
